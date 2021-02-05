@@ -19,6 +19,7 @@ import java.util.Date;
 @NoArgsConstructor
 public class Designer {
 
+
     @ApiModelProperty("设计师id")
     private Long id;
     @ApiModelProperty("设计师名字")

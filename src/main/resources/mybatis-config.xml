@@ -4,13 +4,9 @@
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 
-    <!-- 导入db配置 -->
      <typeAliases>
        <!--配置实体类包路径-->
        <package name="com.runsoftware.decoration.model" />
     </typeAliases>
 
-    <mappers>
-        <mapper resource="org/mybatis/app/dao/xml/BookMapper.xml"/>
-    </mappers>
 </configuration>
