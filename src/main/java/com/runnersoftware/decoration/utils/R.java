@@ -1,4 +1,4 @@
-package com.runsoftware.decoration.utils;
+package com.runnersoftware.decoration.utils;
 
 import lombok.Data;
 import lombok.experimental.Accessors;

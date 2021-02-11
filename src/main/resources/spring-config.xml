@@ -44,13 +44,13 @@
 
 
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.runsoftware.decoration.mapper" />
+        <property name="basePackage" value="com.runnersoftware.decoration.mapper" />
     </bean>
-    <context:component-scan base-package="com.runsoftware.decoration.service" />
+    <context:component-scan base-package="com.runnersoftware.decoration.service" />
 
 
     <aop:config>
-        <aop:pointcut expression="execution(* com.runsoftware.decoration.service.Impl.*.*(..))" id="cutPoint" />
+        <aop:pointcut expression="execution(* com.runnersoftware.decoration.service.Impl.*.*(..))" id="cutPoint" />
         <aop:advisor advice-ref="txAdvice" pointcut-ref="cutPoint" />
     </aop:config>
 

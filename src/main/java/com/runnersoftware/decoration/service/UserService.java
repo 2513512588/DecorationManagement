@@ -1,4 +1,4 @@
-package com.runsoftware.decoration.service;
+package com.runnersoftware.decoration.service;
 
 import org.springframework.security.core.userdetails.UserDetailsService;
 

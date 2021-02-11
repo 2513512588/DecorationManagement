@@ -14,7 +14,7 @@
     <context:annotation-config />
 
     <!-- 使用基于注解的控制器，spring会自动扫描base-package下的子包和类，如果扫描到会把这些类注册为bean-->
-    <context:component-scan base-package="com.runsoftware.decoration"/>
+    <context:component-scan base-package="com.runnersoftware.decoration"/>
 
     <!--
         location:指location指定的目录不要拦截，直接请求，这里指在根目录下的resources文件下的所有文件

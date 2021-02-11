@@ -1,4 +1,4 @@
-package com.runsoftware.decoration.mapper;
+package com.runnersoftware.decoration.mapper;
 
 import java.util.List;
 

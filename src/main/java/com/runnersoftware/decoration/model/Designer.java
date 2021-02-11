@@ -1,4 +1,4 @@
-package com.runsoftware.decoration.model;
+package com.runnersoftware.decoration.model;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -30,5 +30,7 @@ public class Designer {
     private Date createTime;
     @ApiModelProperty("设计师是否启用")
     private Boolean enable;
+    @ApiModelProperty("设计师图片")
+    private String cover;
 
 }

@@ -1,6 +1,6 @@
-package com.runsoftware.decoration.service;
+package com.runnersoftware.decoration.service;
 
-import com.runsoftware.decoration.model.Designer;
+import com.runnersoftware.decoration.model.Designer;
 
 import java.util.List;
 

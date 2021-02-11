@@ -1,4 +1,4 @@
-package com.runsoftware.decoration.model;
+package com.runnersoftware.decoration.model;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -27,6 +27,8 @@ public class Material {
     private Long groupId;
     @ApiModelProperty("装修材料设计师id")
     private Long designerId;
+    @ApiModelProperty("装修材料图片")
+    private String cover;
 
 
 }

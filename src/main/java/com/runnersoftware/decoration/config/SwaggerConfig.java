@@ -1,4 +1,4 @@
-package com.runsoftware.decoration.config;
+package com.runnersoftware.decoration.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

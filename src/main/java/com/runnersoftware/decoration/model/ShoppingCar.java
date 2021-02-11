@@ -1,4 +1,4 @@
-package com.runsoftware.decoration.model;
+package com.runnersoftware.decoration.model;
 
 
 import io.swagger.annotations.ApiModel;

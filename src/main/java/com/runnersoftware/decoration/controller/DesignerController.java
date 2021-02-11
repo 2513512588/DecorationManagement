@@ -1,4 +1,4 @@
-package com.runsoftware.decoration.controller;
+package com.runnersoftware.decoration.controller;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -16,11 +16,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class DesignerController {
 
     @ApiOperation("查找所有设计师数据")
-    @PostMapping("/findAll")
+    @PostMapping("/index")
     public String findAll(Model model){
         model.addAttribute("","");
-        return "";
+        return "index";
     }
+
+
 
 
 
