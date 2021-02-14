@@ -76,11 +76,11 @@
                     })
 
                     window.updateModel = function (id){
-                        $.post(`../../designer/query/${id}`,function (res){
+                        $.post(`../../user/query/${id}`,function (res){
                             layui.layer.open({
                                 type: 2,
                                 content: './add.html', //数组第二项即吸附元素选择器或者DOM
-                                area: ['700px','500px'],
+                                area: ['700px','300px'],
                                 maxmin: true,
                                 title: 'INFO',
                                 shade : false ,
@@ -93,14 +93,14 @@
                                     $.each(res.data.designer,function (key,value){
                                         body.find(`input[name=${key}]`).val(value)
                                     })
-                                    iframeWin.uploadInstance.config.url = "../../designer/update"
+                                    iframeWin.requestURL = "../../user/update"
                                 },
                             });
                         })
                     }
 
                     window.removeModel = function (id){
-                        $.get(`../../designer/remove/${id}`,function (res){
+                        $.get(`../../user/remove/${id}`,function (res){
                             if (res.success){
                                 tableInstance.reload()
                             }else{

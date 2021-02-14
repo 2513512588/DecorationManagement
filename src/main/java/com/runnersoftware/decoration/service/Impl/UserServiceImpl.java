@@ -2,6 +2,7 @@ package com.runnersoftware.decoration.service.Impl;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.runnersoftware.decoration.service.DesignerService;
 import com.runnersoftware.decoration.service.UserService;
 import com.runnersoftware.decoration.mapper.UserMapper;
 import com.runnersoftware.decoration.model.User;
@@ -19,10 +20,16 @@ import java.util.Map;
 public class UserServiceImpl implements UserService {
 
     private UserMapper userMapper;
+    private DesignerService designerService;
 
     @Autowired
     public void setUserMapper(UserMapper userMapper) {
         this.userMapper = userMapper;
+    }
+
+    @Autowired
+    public void setDesignerService(DesignerService designerService) {
+        this.designerService = designerService;
     }
 
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
@@ -37,11 +44,13 @@ public class UserServiceImpl implements UserService {
         return userMapper.update(user.setPassword(passwordEncoder.encode(user.getPassword()))) != 0;
     }
 
+
     public Boolean removeById(Long id) {
+        designerService.removeById(id);
         return userMapper.delete(new User().setId(id)) != 0;
     }
 
-    public Boolean insert(User user) {
+    public Boolean createUser(User user) {
         return userMapper.insert(user.setPassword(passwordEncoder.encode(user.getPassword()))) != 0;
     }
 
@@ -52,5 +61,9 @@ public class UserServiceImpl implements UserService {
         map.put("rows", designers);
         map.put("count", page.getTotal());
         return map;
+    }
+
+    public User findById(Long id) {
+        return userMapper.find(new User().setId(id)).get(0);
     }
 }
