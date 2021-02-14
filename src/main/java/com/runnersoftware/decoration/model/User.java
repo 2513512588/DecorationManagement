@@ -1,5 +1,6 @@
 package com.runnersoftware.decoration.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
@@ -30,11 +31,10 @@ public class User {
     @ApiModelProperty("用户密码")
     @JsonIgnore
     private String password;
-    @ApiModelProperty("用户余额")
-    private Float balance;
     @ApiModelProperty("用户账户是否启用")
     private Boolean enable;
     @ApiModelProperty("用户注册时间")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT-8")
     private Date regTime;
 
 
