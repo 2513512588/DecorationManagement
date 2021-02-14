@@ -59,7 +59,7 @@
                         ,cols: [[ //表头
                              {field: 'id', title: 'ID', width:180},
                              {field: 'username', title: '用户名', width:160},
-                             {field: 'regTime', title: '创建时间', width: 280, sort: true},
+                             {field: 'regTime', title: '创建时间', sort: true},
                              {title: '操作', fixed: 'right', width: 120, templet: '<div><button type="button" class="layui-btn layui-btn-sm" onclick="updateModel(`{{d.id}}`)"><i class="layui-icon">&#xe642;</i></button><button type="button" class="layui-btn layui-btn-danger layui-btn-sm" onclick="removeModel(`{{d.id}}`)" ><i class="layui-icon">&#xe640;</i></button></div>'}
                         ]]
                     });

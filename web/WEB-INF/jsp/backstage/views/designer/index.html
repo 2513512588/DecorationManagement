@@ -66,7 +66,7 @@
                              {field: 'enable', title: '是否启用', width: 177 , templet: function (row){
                                 return `<div><input type="checkbox" name="switch" lay-skin="switch" lay-text="开启|关闭" value="true" lay-filter="switchEnable" ${row.enable && 'checked'} data-id="${row.id}" ></div>`
                              }},
-                             {field: 'description', title: '描述', width: 200},
+                             {field: 'description', title: '描述'},
                              {title: '操作', fixed: 'right', width: 120, templet: '<div><button type="button" class="layui-btn layui-btn-sm" onclick="updateModel(`{{d.id}}`)"><i class="layui-icon">&#xe642;</i></button><button type="button" class="layui-btn layui-btn-danger layui-btn-sm" onclick="removeModel(`{{d.id}}`)" ><i class="layui-icon">&#xe640;</i></button></div>'}
                         ]]
                     });
