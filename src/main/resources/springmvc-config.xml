@@ -26,7 +26,7 @@
     <mvc:resources mapping="/css/**" location="/css/" />
     <mvc:resources mapping="/layui/**" location="/layui/" />
     <mvc:resources mapping="/views/**" location="/WEB-INF/jsp/backstage/views/" />
-    <mvc:resources mapping="/images/**" location="/images/" />
+    <mvc:resources mapping="/image/**" location="/image/" />
     <mvc:resources location="classpath:/META-INF/resources/" mapping="swagger-ui.html"/>
     <mvc:resources location="classpath:/META-INF/resources/webjars/" mapping="/webjars/**"/>
 

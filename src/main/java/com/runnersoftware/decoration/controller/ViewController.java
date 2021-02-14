@@ -10,6 +10,11 @@ public class ViewController {
 
     @GetMapping("/index")
     public String index(){
+        return "/index";
+    }
+
+    @GetMapping("/backstage")
+    public String backstage(){
         return "backstage/index";
     }
 

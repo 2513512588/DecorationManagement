@@ -2,28 +2,182 @@
 <html lang="zh">
 <head>
     <title>Title</title>
+    <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-LCPyFKQyML7mqtS+4XytolfqyqSlcbB3bvDuH9vX2sdQMxRonb/M3b9EmhCNNNrV" crossorigin="anonymous"></script>
+    <base href="${pageContext.request.contextPath}/" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" ></script>
+    <link rel="stylesheet" href="css/front/index.css">
 </head>
 <body>
 
-    <nav class="navbar navbar-dark bg-dark">
-        <a class="navbar-brand">Navbar</a>
-        <form class="form-inline">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
-    </nav>
+<nav class="navbar navbar-dark bg-dark">
+    <a class="navbar-brand">Navbar</a>
+    <div class="btn-group" >
+        <a href="login.html" class="btn btn-primary">登录</a>
+        <a href="login.html" class="btn btn-light">注册</a>
+    </div>
+</nav>
+
+<div class="main-body">
+
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" style="margin: 20px 0">
+        <ol class="carousel-indicators">
+            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="https://cn.bing.com/sa/simg/hpb/LaDigue_EN-CA1115245085_1920x1080.jpg" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="https://cn.bing.com/sa/simg/hpb/LaDigue_EN-CA1115245085_1920x1080.jpg" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="https://cn.bing.com/sa/simg/hpb/LaDigue_EN-CA1115245085_1920x1080.jpg" class="d-block w-100" alt="...">
+            </div>
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
 
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item active" aria-current="page">Home</li>
+            <li class="breadcrumb-item active" aria-current="page">设计师</li>
         </ol>
     </nav>
+
+    <div class="card-container">
+        <div class="card">
+            <img src="image/201912081449219995_cuP.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">肖鹏</h5>
+                <p class="card-text" style="font-size: 13px">用心观察生活，感悟人生真谛，让设计与生活互动。我们生活的真正目的，便是透过创意和点子，为客户塑</p>
+            </div>
+        </div>
+        <div class="card">
+            <img src="image/201912081449219995_cuP.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">肖鹏</h5>
+                <p class="card-text" style="font-size: 13px">用心观察生活，感悟人生真谛，让设计与生活互动。我们生活的真正目的，便是透过创意和点子，为客户塑</p>
+            </div>
+        </div>
+        <div class="card">
+            <img src="image/201912081449219995_cuP.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">肖鹏</h5>
+                <p class="card-text" style="font-size: 13px">用心观察生活，感悟人生真谛，让设计与生活互动。我们生活的真正目的，便是透过创意和点子，为客户塑</p>
+            </div>
+        </div>
+        <div class="card">
+            <img src="image/201912081449219995_cuP.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">肖鹏</h5>
+                <p class="card-text" style="font-size: 13px">用心观察生活，感悟人生真谛，让设计与生活互动。我们生活的真正目的，便是透过创意和点子，为客户塑</p>
+            </div>
+        </div>
+        <div class="card">
+            <img src="image/201912081449219995_cuP.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">肖鹏</h5>
+                <p class="card-text" style="font-size: 13px">用心观察生活，感悟人生真谛，让设计与生活互动。我们生活的真正目的，便是透过创意和点子，为客户塑</p>
+            </div>
+        </div>
+        <div class="card">
+            <img src="image/201912081449219995_cuP.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">肖鹏</h5>
+                <p class="card-text" style="font-size: 13px">用心观察生活，感悟人生真谛，让设计与生活互动。我们生活的真正目的，便是透过创意和点子，为客户塑</p>
+            </div>
+        </div>
+        <div class="card">
+            <img src="image/201912081449219995_cuP.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">肖鹏</h5>
+                <p class="card-text" style="font-size: 13px">用心观察生活，感悟人生真谛，让设计与生活互动。我们生活的真正目的，便是透过创意和点子，为客户塑</p>
+            </div>
+        </div>
+    </div>
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item active" aria-current="page">装修材料推荐</li>
+        </ol>
+    </nav>
+
+    <div class="card-container">
+
+        <div class="card">
+            <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="image/201912081449219995_cuP.jpg" class="d-block w-100" alt="...">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>Second slide label</h5>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="image/201912081449219995_cuP.jpg" class="d-block w-100" alt="...">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>Second slide label</h5>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="image/201912081449219995_cuP.jpg" class="d-block w-100" alt="...">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>Third slide label</h5>
+                        </div>
+                    </div>
+                </div>
+                <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">玛迩维108内外平全隐形排水系统断桥窗</h5>
+                <p class="card-text" style="margin-bottom: 0.3rem">规 格：108</p>
+                <p class="card-text" style="margin-bottom: 0.3rem">产 地：广东佛山</p>
+                <p class="card-text" style="margin-bottom: 0.3rem">价 格：￥980</p>
+                <p class="card-text" style="margin-bottom: 0.3rem">上线日期：2021-01-11 15:19:36</p>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">An item</li>
+                <li class="list-group-item">A second item</li>
+                <li class="list-group-item">A third item</li>
+            </ul>
+            <div class="card-body">
+                <a href="#" class="card-link">立即购买</a>
+                <a href="#" class="card-link">加入购物车</a>
+            </div>
+        </div>
+
+
+
+    </div>
+
+</div>
+
+<div class="jumbotron jumbotron-fluid" style="margin-bottom: 0; margin-top: 2rem; background-color:#474C4B;">
+    <div class="container">
+        <h1 class="display-4">Fluid jumbotron</h1>
+        <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
+    </div>
+</div>
 
 </body>
 </html>

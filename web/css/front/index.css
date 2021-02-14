@@ -1,0 +1,24 @@
+html,body{
+    margin: 0;
+    padding: 0;
+    background-color: #f2f2f2;
+}
+.main-body{
+    width: 1140px;
+    margin: 0 auto;
+}
+.card-container{
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+.card-container>div{
+    width: 275px;
+    margin: 0 5px;
+    margin-bottom: 13px;
+}
+.navbar{
+    padding: .5rem 6rem;
+}

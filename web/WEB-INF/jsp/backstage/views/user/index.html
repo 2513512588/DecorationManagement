@@ -59,6 +59,9 @@
                         ,cols: [[ //表头
                              {field: 'id', title: 'ID', width:180},
                              {field: 'username', title: '用户名', width:160},
+                             {field: 'enable', title: '是否启用', width: 177 , templet: function (row){
+                                    return `<div><input type="checkbox" name="switch" lay-skin="switch" lay-text="开启|关闭" value="true" lay-filter="switchEnable" ${row.enable && 'checked'} data-id="${row.id}" ></div>`
+                             }},
                              {field: 'regTime', title: '创建时间', sort: true},
                              {title: '操作', fixed: 'right', width: 120, templet: '<div><button type="button" class="layui-btn layui-btn-sm" onclick="updateModel(`{{d.id}}`)"><i class="layui-icon">&#xe642;</i></button><button type="button" class="layui-btn layui-btn-danger layui-btn-sm" onclick="removeModel(`{{d.id}}`)" ><i class="layui-icon">&#xe640;</i></button></div>'}
                         ]]

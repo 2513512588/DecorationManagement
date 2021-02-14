@@ -12,6 +12,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.util.HashMap;
 import java.util.List;
@@ -42,7 +43,10 @@ public class UserServiceImpl implements UserService {
     private PasswordEncoder passwordEncoder;
 
     public Boolean update(User user) {
-        return userMapper.update(user.setPassword(passwordEncoder.encode(user.getPassword()))) != 0;
+        if(!StringUtils.isEmpty(user.getPassword())){
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
+        }
+        return userMapper.update(user) != 0;
     }
 
 
