@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.runnersoftware.decoration.mapper.ShoppingCarMapper">
+
+    <select id="find" resultMap="baseMap">
+        SELECT *
+        FROM sys_scar
+    </select>
+
+    <delete id="delete" parameterType="com.runnersoftware.decoration.model.ShoppingCar">
+        DELETE
+        FROM sys_scar
+        WHERE id = '${id}'
+    </delete>
+
+    <insert id="insert" parameterType="com.runnersoftware.decoration.model.ShoppingCar">
+        INSERT INTO sys_scar(id, materials_group_id, user_id)
+        VALUES (UUID_SHORT(), #{id}, #{materialGroupId}, #{userId})
+    </insert>
+
+    <update id="update" parameterType="com.runnersoftware.decoration.model.ShoppingCar">
+        UPDATE sys_scar
+        <set>
+            <if test="materials_group_id != null and materials_group_id != ''">
+                description = #{description},
+            </if>
+            <if test="user_id != null">
+                enable = #{enable},
+            </if>
+        </set>
+        WHERE id = '${id}'
+    </update>
+
+    <resultMap id="baseMap" type="com.runnersoftware.decoration.model.ShoppingCar">
+        <id property="id" column="id"/>
+        <result property="materialGroupId" column="material_group_id"/>
+        <result property="userId" column="user_id"/>
+        <result property="createTime" column="createtime"/>
+    </resultMap>
+
+</mapper>

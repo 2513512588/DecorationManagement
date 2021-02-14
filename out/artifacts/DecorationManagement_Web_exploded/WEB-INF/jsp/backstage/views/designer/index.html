@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../../layui/css/layui.css">
+    <script src="../../layui/layui.js"></script>
+    <script type="text/javascript" src="../../js/jquery.js" ></script>
+</head>
+<body>
+    <div class="layui-card">
+        <div class="layui-card-header">设计师列表</div>
+        <div class="layui-card-body">
+            <form class="layui-form">
+<!--                <div class="layui-inline">-->
+<!--                    <div class="layui-input-inline">-->
+<!--                        <input type="text" name="search" placeholder="请输入名字 " autocomplete="off" class="layui-input">-->
+<!--                    </div>-->
+<!--                </div>-->
+                <div class="layui-inline">
+                    <div class="layui-input-inline">
+                        <button class="layui-btn" lay-submit lay-filter="searchForm">刷新数据</button>
+                    </div>
+                </div>
+            </form>
+
+            <table id="designerTable" lay-filter="test"></table>
+
+
+            <script type="text/javascript">
+                layui.use(['table','form','layer'], function(){
+
+                    layui.form.on('submit(searchForm)',function (data){
+                        tableInstance.config.request = Object.assign(tableInstance.config.request,data.field)
+                        console.log(tableInstance.config.request)
+                        console.log(tableInstance)
+                        tableInstance.reload()
+                        return false
+                    })
+
+                    //第一个实例
+                    let tableInstance = layui.table.render({
+                         elem: '#designerTable'
+                        ,height: 500
+                        ,url: '../../designer/query' //数据接口
+                        ,page: true //开启分页
+                        ,parseData: function (res){
+                             res.count = res.data.count
+                             res.data = res.data.rows
+                             return res
+                        }
+                        ,response: {
+                             statusName: 'code' //规定数据状态的字段名称，默认：code
+                            ,statusCode: 20000 //规定成功的状态码，默认：0
+                            ,msgName: 'message' //规定状态信息的字段名称，默认：msg
+                            ,countName: 'count' //规定数据总数的字段名称，默认：count
+                            ,dataName: 'data' //规定数据列表的字段名称，默认：data
+                        }
+                        ,cols: [[ //表头
+                             {field: 'id', title: 'ID', width:180},
+                             {field: 'name', title: '名字', width:160},
+                             {field: 'cover', title: '封面', width:120 , templet: function (row){
+                                return `<div style="display:flex; align-items: center; justify-content: center; height: 100%"><img src="${row.cover}" /></div>`
+                             }},
+                             {field: 'createTime', title: '创建时间', width:150, sort: true},
+                             {field: 'enable', title: '是否启用', width: 177 , templet: function (row){
+                                return `<div><input type="checkbox" name="switch" lay-skin="switch" lay-text="开启|关闭" value="true" lay-filter="switchEnable" ${row.enable && 'checked'} data-id="${row.id}" ></div>`
+                             }},
+                             {field: 'description', title: '描述'},
+                             {title: '操作', fixed: 'right', width: 120, templet: '<div><button type="button" class="layui-btn layui-btn-sm" onclick="updateModel(`{{d.id}}`)"><i class="layui-icon">&#xe642;</i></button><button type="button" class="layui-btn layui-btn-danger layui-btn-sm" onclick="removeModel(`{{d.id}}`)" ><i class="layui-icon">&#xe640;</i></button></div>'}
+                        ]]
+                    });
+
+                    layui.form.on('switch(switchEnable)',function (data){
+                        $.post('../../user/update',{
+                            id: data.elem.attributes['data-id'].nodeValue,
+                            enable: data.elem.checked
+                        },function (res){
+                            if (!res.success){
+                                layui.layer.msg(res.message)
+                            }
+                        })
+                    })
+
+                    window.updateModel = function (id){
+                        $.post(`../../designer/query/${id}`,function (res){
+                            layui.layer.open({
+                                type: 2,
+                                content: './add.html', //数组第二项即吸附元素选择器或者DOM
+                                area: ['700px','500px'],
+                                maxmin: true,
+                                title: 'INFO',
+                                shade : false ,
+                                zIndex: layer.zIndex,
+                                success: function(layero, index){
+                                    layer.setTop(layero);
+                                    layer.iframeAuto(index)
+                                    let body = layer.getChildFrame('body', index);
+                                    let iframeWin = window[layero.find('iframe')[0]['name']]; //得到iframe页的窗口对象，执行iframe页的方法：iframeWin.method();
+                                    $.each(res.data.designer,function (key,value){
+                                        body.find(`input[name=${key}]`).val(value)
+                                    })
+                                    iframeWin.uploadInstance.config.url = "../../designer/update"
+                                },
+                            });
+                        })
+                    }
+
+                    window.removeModel = function (id){
+                        $.get(`../../designer/remove/${id}`,function (res){
+                            if (res.success){
+                                tableInstance.reload()
+                            }else{
+                                layui.layer.msg(res.message)
+                            }
+                        })
+                    }
+
+                });
+            </script>
+
+        </div>
+    </div>
+</body>
+</html>
