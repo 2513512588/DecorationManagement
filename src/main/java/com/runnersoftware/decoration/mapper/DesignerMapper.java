@@ -13,4 +13,11 @@ import java.util.List;
 @Repository
 public interface DesignerMapper extends BaseMapper<Designer>{
 
+    Integer insert(Designer designer);
+
+    Integer update(Designer designer);
+
+    Integer delete(Designer designer);
+
+    List<Designer> find(Designer designer);
 }
