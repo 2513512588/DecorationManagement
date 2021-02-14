@@ -9,4 +9,12 @@
        <package name="com.runnersoftware.decoration.model" />
     </typeAliases>
 
+    <plugins>
+        <plugin interceptor="com.github.pagehelper.PageInterceptor">
+            <property name="helperDialect" value="mysql"/>
+            <property name="reasonable" value="true" />
+<!--            <property name="pageNum" value="5"/>-->
+        </plugin>
+    </plugins>
+
 </configuration>

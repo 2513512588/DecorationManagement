@@ -36,6 +36,10 @@ public class R {
         return r;
     }
 
+    public static R auto(Boolean success){
+        return success ? ok() : error();
+    }
+
     public R code(Integer code){
         this.code = code;
         return this;
@@ -53,6 +57,11 @@ public class R {
 
     public R data(String key , Object value){
         data.put(key, value);
+        return this;
+    }
+
+    public R data(Map<String, Object> map){
+        this.data = map;
         return this;
     }
 

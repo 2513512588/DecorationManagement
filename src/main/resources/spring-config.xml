@@ -17,7 +17,7 @@
 
     <context:annotation-config/>
 
-    <context:property-placeholder location="classpath:db.properties"/>
+    <context:property-placeholder location="classpath:db.properties,classpath:alioss.properties"/>
 
     <bean id="pooledDataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
         <property name="driverClass" value="${jdbc.driver}"/>
@@ -26,6 +26,13 @@
         <property name="password" value="${jdbc.password}"/>
         <!--            <property name="autoCommitOnClose" value="true" />-->
         <!--            <property name="maxPoolSize" value="30" />-->
+    </bean>
+
+    <bean id="aliOssProperties" class="com.runnersoftware.decoration.utils.AliOssProperties">
+        <property name="endPoint" value="${endPoint}" />
+        <property name="bucketName" value="${bucketName}" />
+        <property name="keyId" value="${keyId}" />
+        <property name="keySecret" value="${keySecret}" />
     </bean>
 
 
@@ -46,7 +53,7 @@
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage" value="com.runnersoftware.decoration.mapper" />
     </bean>
-    <context:component-scan base-package="com.runnersoftware.decoration.service" />
+    <context:component-scan base-package="com.runnersoftware.decoration" />
 
 
     <aop:config>

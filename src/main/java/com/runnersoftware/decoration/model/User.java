@@ -1,5 +1,8 @@
 package com.runnersoftware.decoration.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -20,10 +23,12 @@ import java.util.Date;
 public class User {
 
     @ApiModelProperty("用户id")
+    @JsonSerialize(using= ToStringSerializer.class)
     private Long id;
     @ApiModelProperty("用户名")
     private String username;
     @ApiModelProperty("用户密码")
+    @JsonIgnore
     private String password;
     @ApiModelProperty("用户余额")
     private Float balance;

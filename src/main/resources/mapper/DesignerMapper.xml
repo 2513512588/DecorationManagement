@@ -5,28 +5,62 @@
 <mapper namespace="com.runnersoftware.decoration.mapper.DesignerMapper">
 
     <select id="find" resultMap="baseMap" >
-        SELECT id, name, description, createtime, enable FROM sys_designer
+        SELECT sys_designer.id, name, cover, description, createtime, sys_user.enable, sys_user.username, sys_user.password FROM sys_designer LEFT JOIN sys_user ON sys_designer.id = sys_user.id
         <where>
             <if test="name != null and name != ''">
-                name = #{name}
+                AND name = #{name}
             </if>
             <if test="description != null and description != ''">
-                description = #{description}
+                AND description = #{description}
             </if>
-            <if test="createtime != null">
-                createtime = #{createtime}
+            <if test="createTime != null">
+                AND createtime = #{createTime}
             </if>
             <if test="enable != null">
-                enable = #{enable}
+                AND sys_user.enable = #{enable}
+            </if>
+            <if test="id != null" >
+                AND sys_designer.id = '${id}'
             </if>
         </where>
     </select>
 
-    <resultMap id="baseMap" type="Designer" >
+    <insert id="insert" parameterType="com.runnersoftware.decoration.model.Designer">
+        INSERT INTO sys_designer(id, name, cover, description) SELECT UUID_SHORT(), #{name}, #{cover}, #{description} WHERE NOT EXISTS(SELECT id FROM sys_designer WHERE name = #{name})
+        <selectKey order="AFTER" keyColumn="id" keyProperty="id" resultType="java.lang.Long">
+            SELECT id FROM sys_designer WHERE name = #{name}
+        </selectKey>
+    </insert>
+
+    <update id="update" parameterType="com.runnersoftware.decoration.model.Designer" >
+        UPDATE sys_designer
+        <set>
+            <if test="name != null and name != ''">
+                name = #{name},
+            </if>
+            <if test="description != null and description != ''">
+                description = #{description},
+            </if>
+            <if test="enable != null">
+                enable = #{enable},
+            </if>
+            <if test="cover != null and cover != ''">
+                cover = #{cover},
+            </if>
+        </set>
+         WHERE id = '${id}'
+    </update>
+
+    <delete id="delete" parameterType="com.runnersoftware.decoration.model.Designer"  >
+        DELETE FROM sys_designer WHERE id = '${id}'
+    </delete>
+
+    <resultMap id="baseMap" type="com.runnersoftware.decoration.model.Designer" >
         <id property="id" column="id" />
         <result property="name" column="name" />
         <result property="description" column="description" />
         <result property="createTime" column="createtime" />
+        <result property="cover" column="cover" />
         <result property="enable" column="enable" />
     </resultMap>
 

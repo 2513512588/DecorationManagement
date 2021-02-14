@@ -24,6 +24,8 @@
     <mvc:annotation-driven /> <!--加载注解驱动-->
     <mvc:resources mapping="/js/**" location="/js/" />
     <mvc:resources mapping="/css/**" location="/css/" />
+    <mvc:resources mapping="/layui/**" location="/layui/" />
+    <mvc:resources mapping="/views/**" location="/WEB-INF/jsp/backstage/views/" />
     <mvc:resources mapping="/images/**" location="/images/" />
     <mvc:resources location="classpath:/META-INF/resources/" mapping="swagger-ui.html"/>
     <mvc:resources location="classpath:/META-INF/resources/webjars/" mapping="/webjars/**"/>
@@ -31,6 +33,11 @@
     <!--  配置处理映射器和处理器适配器 在Spring4.0后，不配置，会默认加载-->
     <!-- <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"/> -->
     <!-- <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter"/> -->
+
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" >
+        <property name="maxUploadSize" value="52428800" />
+        <property name="defaultEncoding" value="UTF-8" />
+    </bean>
 
     <!-- 配置视图解析器，经过视图解析器后，视图的的完成路径为[prefix]+返回的视图字符串+[suffix] -->
     <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
