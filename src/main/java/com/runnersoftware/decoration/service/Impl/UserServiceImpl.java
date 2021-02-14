@@ -2,6 +2,8 @@ package com.runnersoftware.decoration.service.Impl;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.runnersoftware.decoration.mapper.DesignerMapper;
+import com.runnersoftware.decoration.model.Designer;
 import com.runnersoftware.decoration.service.UserService;
 import com.runnersoftware.decoration.mapper.UserMapper;
 import com.runnersoftware.decoration.model.User;
@@ -10,6 +12,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.util.HashMap;
 import java.util.List;
@@ -19,10 +22,16 @@ import java.util.Map;
 public class UserServiceImpl implements UserService {
 
     private UserMapper userMapper;
+    private DesignerMapper designerMapper;
 
     @Autowired
     public void setUserMapper(UserMapper userMapper) {
         this.userMapper = userMapper;
+    }
+
+    @Autowired
+    public void setDesignerMapper(DesignerMapper designerMapper) {
+        this.designerMapper = designerMapper;
     }
 
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
@@ -34,14 +43,19 @@ public class UserServiceImpl implements UserService {
     private PasswordEncoder passwordEncoder;
 
     public Boolean update(User user) {
-        return userMapper.update(user.setPassword(passwordEncoder.encode(user.getPassword()))) != 0;
+        if(!StringUtils.isEmpty(user.getPassword())){
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
+        }
+        return userMapper.update(user) != 0;
     }
 
+
     public Boolean removeById(Long id) {
+        designerMapper.delete(new Designer().setId(id));
         return userMapper.delete(new User().setId(id)) != 0;
     }
 
-    public Boolean insert(User user) {
+    public Boolean createUser(User user) {
         return userMapper.insert(user.setPassword(passwordEncoder.encode(user.getPassword()))) != 0;
     }
 
@@ -52,5 +66,9 @@ public class UserServiceImpl implements UserService {
         map.put("rows", designers);
         map.put("count", page.getTotal());
         return map;
+    }
+
+    public User findById(Long id) {
+        return userMapper.find(new User().setId(id)).get(0);
     }
 }

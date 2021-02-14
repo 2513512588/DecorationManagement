@@ -14,7 +14,9 @@ public interface UserService extends UserDetailsService {
 
     Boolean removeById(Long id);
 
-    Boolean insert(User user);
+    Boolean createUser(User user);
 
     Map<String, Object> findAllByPage(Map<String, Object> params);
+
+    User findById(Long id);
 }

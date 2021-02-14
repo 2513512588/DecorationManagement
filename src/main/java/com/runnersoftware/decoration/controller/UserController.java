@@ -35,6 +35,24 @@ public class UserController {
         return R.ok().data(userService.findAllByPage(params));
     }
 
+    @ApiOperation("根据id查找用户")
+    @PostMapping("/query/{id}")
+    public R findById(@PathVariable Long id){
+        return R.ok().data("designer", userService.findById(id));
+    }
+
+    @ApiOperation("添加用户")
+    @PostMapping("/create")
+    public R insertModel(User user) {
+        return R.auto(userService.createUser(user));
+    }
+
+    @ApiOperation("删除用户数据")
+    @GetMapping("/remove/{id}")
+    public R removeModel(@PathVariable Long id){
+        return R.auto(userService.removeById(id));
+    }
+
     @ApiOperation("更新用户数据")
     @PostMapping("/update")
     public R updateModel(User user) {

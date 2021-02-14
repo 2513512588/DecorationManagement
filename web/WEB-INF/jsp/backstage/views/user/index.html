@@ -59,6 +59,9 @@
                         ,cols: [[ //表头
                              {field: 'id', title: 'ID', width:180},
                              {field: 'username', title: '用户名', width:160},
+                             {field: 'enable', title: '是否启用', width: 177 , templet: function (row){
+                                    return `<div><input type="checkbox" name="switch" lay-skin="switch" lay-text="开启|关闭" value="true" lay-filter="switchEnable" ${row.enable && 'checked'} data-id="${row.id}" ></div>`
+                             }},
                              {field: 'regTime', title: '创建时间', sort: true},
                              {title: '操作', fixed: 'right', width: 120, templet: '<div><button type="button" class="layui-btn layui-btn-sm" onclick="updateModel(`{{d.id}}`)"><i class="layui-icon">&#xe642;</i></button><button type="button" class="layui-btn layui-btn-danger layui-btn-sm" onclick="removeModel(`{{d.id}}`)" ><i class="layui-icon">&#xe640;</i></button></div>'}
                         ]]
@@ -76,11 +79,11 @@
                     })
 
                     window.updateModel = function (id){
-                        $.post(`../../designer/query/${id}`,function (res){
+                        $.post(`../../user/query/${id}`,function (res){
                             layui.layer.open({
                                 type: 2,
                                 content: './add.html', //数组第二项即吸附元素选择器或者DOM
-                                area: ['700px','500px'],
+                                area: ['700px','300px'],
                                 maxmin: true,
                                 title: 'INFO',
                                 shade : false ,
@@ -93,14 +96,14 @@
                                     $.each(res.data.designer,function (key,value){
                                         body.find(`input[name=${key}]`).val(value)
                                     })
-                                    iframeWin.uploadInstance.config.url = "../../designer/update"
+                                    iframeWin.requestURL = "../../user/update"
                                 },
                             });
                         })
                     }
 
                     window.removeModel = function (id){
-                        $.get(`../../designer/remove/${id}`,function (res){
+                        $.get(`../../user/remove/${id}`,function (res){
                             if (res.success){
                                 tableInstance.reload()
                             }else{

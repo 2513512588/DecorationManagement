@@ -86,7 +86,7 @@
 
         //执行实例
         uploadInstance = upload.render({
-             elem: '#upload' //绑定元素
+            elem: '#upload' //绑定元素
             ,url: '../../designer/create' //上传接口
             ,drag: true
             ,auto: false
@@ -106,7 +106,6 @@
                     document.querySelector('.layui-form').reset()
                     layui.layer.msg(res.message)
                 }
-                layui.layer.closeAll();
             }
             ,error: function(){
                 //请求异常回调

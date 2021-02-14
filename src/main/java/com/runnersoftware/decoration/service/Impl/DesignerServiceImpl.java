@@ -47,7 +47,7 @@ public class DesignerServiceImpl implements DesignerService {
         User user = new User();
         boolean b1 = designerMapper.insert(designer) != 0;
         BeanUtils.copyProperties(designer, user);
-        boolean b2 = userService.insert(user);
+        boolean b2 = userService.createUser(user);
         if (b1 && b2){
             return true;
         }else {
