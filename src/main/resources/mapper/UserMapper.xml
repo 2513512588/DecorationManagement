@@ -4,6 +4,9 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.runnersoftware.decoration.mapper.UserMapper">
 
+    <select id="select" resultType="com.runnersoftware.decoration.model.User" resultMap="baseMap" >
+        SELECT id, username, password, enable, regtime FROM sys_user
+    </select>
 
     <insert id="insert" parameterType="com.runnersoftware.decoration.model.User"  >
         INSERT INTO sys_user(id, username, password) SELECT
@@ -39,13 +42,12 @@
         DELETE FROM sys_user WHERE id = '${id}'
     </delete>
 
-    <!--    <resultMap id="baseMap" type="com.runnersoftware.decoration.model.Designer" >-->
-<!--        <id property="id" column="id" />-->
-<!--        <result property="name" column="name" />-->
-<!--        <result property="description" column="description" />-->
-<!--        <result property="createTime" column="createtime" />-->
-<!--        <result property="cover" column="cover" />-->
-<!--        <result property="enable" column="enable" />-->
-<!--    </resultMap>-->
+    <resultMap id="baseMap" type="com.runnersoftware.decoration.model.User" >
+        <id property="id" column="id" />
+        <result property="username" column="username" />
+        <result property="password" column="password" />
+        <result property="enable" column="enable" />
+        <result property="regTime" column="regtime" />
+    </resultMap>
 
 </mapper>
