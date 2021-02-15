@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="zh">
 <head>
@@ -58,55 +59,15 @@
     </nav>
 
     <div class="card-container">
-        <div class="card">
-            <img src="image/201912081449219995_cuP.jpg" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">肖鹏</h5>
-                <p class="card-text" style="font-size: 13px">用心观察生活，感悟人生真谛，让设计与生活互动。我们生活的真正目的，便是透过创意和点子，为客户塑</p>
+        <c:forEach items="${designersMap.get('rows')}" var="designer">
+            <div class="card">
+                <img src="${designer.cover}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">${designer.name}</h5>
+                    <p class="card-text" style="font-size: 13px">${designer.description}</p>
+                </div>
             </div>
-        </div>
-        <div class="card">
-            <img src="image/201912081449219995_cuP.jpg" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">肖鹏</h5>
-                <p class="card-text" style="font-size: 13px">用心观察生活，感悟人生真谛，让设计与生活互动。我们生活的真正目的，便是透过创意和点子，为客户塑</p>
-            </div>
-        </div>
-        <div class="card">
-            <img src="image/201912081449219995_cuP.jpg" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">肖鹏</h5>
-                <p class="card-text" style="font-size: 13px">用心观察生活，感悟人生真谛，让设计与生活互动。我们生活的真正目的，便是透过创意和点子，为客户塑</p>
-            </div>
-        </div>
-        <div class="card">
-            <img src="image/201912081449219995_cuP.jpg" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">肖鹏</h5>
-                <p class="card-text" style="font-size: 13px">用心观察生活，感悟人生真谛，让设计与生活互动。我们生活的真正目的，便是透过创意和点子，为客户塑</p>
-            </div>
-        </div>
-        <div class="card">
-            <img src="image/201912081449219995_cuP.jpg" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">肖鹏</h5>
-                <p class="card-text" style="font-size: 13px">用心观察生活，感悟人生真谛，让设计与生活互动。我们生活的真正目的，便是透过创意和点子，为客户塑</p>
-            </div>
-        </div>
-        <div class="card">
-            <img src="image/201912081449219995_cuP.jpg" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">肖鹏</h5>
-                <p class="card-text" style="font-size: 13px">用心观察生活，感悟人生真谛，让设计与生活互动。我们生活的真正目的，便是透过创意和点子，为客户塑</p>
-            </div>
-        </div>
-        <div class="card">
-            <img src="image/201912081449219995_cuP.jpg" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">肖鹏</h5>
-                <p class="card-text" style="font-size: 13px">用心观察生活，感悟人生真谛，让设计与生活互动。我们生活的真正目的，便是透过创意和点子，为客户塑</p>
-            </div>
-        </div>
+        </c:forEach>
     </div>
 
     <nav aria-label="breadcrumb">
