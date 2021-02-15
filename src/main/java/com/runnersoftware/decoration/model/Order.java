@@ -1,5 +1,7 @@
 package com.runnersoftware.decoration.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -20,6 +22,7 @@ import java.util.Date;
 public class Order {
 
     @ApiModelProperty("订单id")
+    @JsonSerialize(using= ToStringSerializer.class)
     private Long id;
     @ApiModelProperty("装修组id")
     private Long materialGroupId;

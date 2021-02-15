@@ -4,7 +4,6 @@ import com.runnersoftware.decoration.model.Designer;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
 
 /**
  * @author HHY

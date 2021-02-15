@@ -78,56 +78,56 @@
 
     <div class="card-container">
 
-        <div class="card">
-            <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <img src="image/201912081449219995_cuP.jpg" class="d-block w-100" alt="...">
-                        <div class="carousel-caption d-none d-md-block">
-                            <h5>Second slide label</h5>
+        <c:forEach items="${materialsMap.get('rows')}" var="material" >
+            <div class="card">
+                <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="image/201912081449219995_cuP.jpg" class="d-block w-100" alt="...">
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5>Second slide label</h5>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="image/201912081449219995_cuP.jpg" class="d-block w-100" alt="...">
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5>Second slide label</h5>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="image/201912081449219995_cuP.jpg" class="d-block w-100" alt="...">
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5>Third slide label</h5>
+                            </div>
                         </div>
                     </div>
-                    <div class="carousel-item">
-                        <img src="image/201912081449219995_cuP.jpg" class="d-block w-100" alt="...">
-                        <div class="carousel-caption d-none d-md-block">
-                            <h5>Second slide label</h5>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <img src="image/201912081449219995_cuP.jpg" class="d-block w-100" alt="...">
-                        <div class="carousel-caption d-none d-md-block">
-                            <h5>Third slide label</h5>
-                        </div>
-                    </div>
+                    <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
                 </div>
-                <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Previous</span>
-                </a>
-                <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Next</span>
-                </a>
+                <div class="card-body">
+                    <h5 class="card-title">玛迩维108内外平全隐形排水系统断桥窗</h5>
+                    <p class="card-text" style="margin-bottom: 0.3rem">规 格：108</p>
+                    <p class="card-text" style="margin-bottom: 0.3rem">产 地：广东佛山</p>
+                    <p class="card-text" style="margin-bottom: 0.3rem">价 格：￥980</p>
+                    <p class="card-text" style="margin-bottom: 0.3rem">上线日期：2021-01-11 15:19:36</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">An item</li>
+                    <li class="list-group-item">A second item</li>
+                    <li class="list-group-item">A third item</li>
+                </ul>
+                <div class="card-body">
+                    <a href="#" class="card-link">立即购买</a>
+                    <a href="#" class="card-link">加入购物车</a>
+                </div>
             </div>
-            <div class="card-body">
-                <h5 class="card-title">玛迩维108内外平全隐形排水系统断桥窗</h5>
-                <p class="card-text" style="margin-bottom: 0.3rem">规 格：108</p>
-                <p class="card-text" style="margin-bottom: 0.3rem">产 地：广东佛山</p>
-                <p class="card-text" style="margin-bottom: 0.3rem">价 格：￥980</p>
-                <p class="card-text" style="margin-bottom: 0.3rem">上线日期：2021-01-11 15:19:36</p>
-            </div>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item">An item</li>
-                <li class="list-group-item">A second item</li>
-                <li class="list-group-item">A third item</li>
-            </ul>
-            <div class="card-body">
-                <a href="#" class="card-link">立即购买</a>
-                <a href="#" class="card-link">加入购物车</a>
-            </div>
-        </div>
-
-
+        </c:forEach>
 
     </div>
 

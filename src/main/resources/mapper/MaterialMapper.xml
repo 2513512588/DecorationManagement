@@ -4,6 +4,78 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.runnersoftware.decoration.mapper.MaterialMapper">
 
+    <insert id="insert" parameterType="com.runnersoftware.decoration.model.Material" >
+        INSERT INTO sys_materials_group(id, name, price, description, group_id, designer_id, cover)
+               VALUES (UUID_SHORT(), #{name}, #{price}, #{description},
+                        <choose>
+                            <when test="groupId != null">
+                                #{groupId}
+                            </when>
+                            <otherwise>
+                                UUID_SHORT()
+                            </otherwise>
+                        </choose>
+                       ,#{designerId}, #{cover}
+                      )
+        <selectKey order="AFTER" keyProperty="groupId" keyColumn="group_id" resultType="java.lang.Long" >
+            SELECT group_id FROM sys_materials_group WHERE designer_id = '${designerId}' AND name = #{name}
+            ORDER BY id DESC LIMIT 0,1
+        </selectKey>
+    </insert>
 
+    <delete id="delete" parameterType="com.runnersoftware.decoration.model.Material"  >
+        DELETE FROM sys_materials_group
+            WHERE
+            <choose>
+                <when test="groupId != null">
+                    AND group_id = '${groupId}'
+                </when>
+                <otherwise>
+                    AND id = '${id}'
+                </otherwise>
+            </choose>
+    </delete>
+
+    <update id="update" parameterType="com.runnersoftware.decoration.model.Material" >
+        UPDATE sys_materials_group
+        <set>
+            <if test="name != null and name != ''" >
+                name = #{name},
+            </if>
+            <if test="description != null and description != ''" >
+                description = #{description},
+            </if>
+            <if test="cover != null and cover != ''" >
+                cover = #{cover},
+            </if>
+            <if test="price != null" >
+                price = #{price},
+            </if>
+        </set>
+         WHERE id = '${id}'
+    </update>
+
+    <select id="findAll" resultType="java.util.List" resultMap="queryMap" >
+        SELECT distinct group_id FROM sys_materials_group
+    </select>
+
+    <select id="findByGroupId" resultMap="baseMap" >
+       SELECT id, name, price, description, group_id, designer_id, cover FROM sys_materials_group WHERE group_id = #{groupId}
+    </select>
+
+    <resultMap id="baseMap" type="com.runnersoftware.decoration.model.Material" >
+        <id property="id" column="id" />
+        <id property="name" column="name" />
+        <id property="description" column="description" />
+        <id property="groupId" column="group_id" />
+        <id property="designerId" column="designer_id" />
+        <id property="cover" column="cover" />
+        <id property="price" column="price" />
+    </resultMap>
+
+    <resultMap id="queryMap" type="com.runnersoftware.decoration.model.vo.MaterialVO" >
+        <id property="groupId" column="group_id" />
+        <collection property="materials" column="group_id" select="findByGroupId" ofType="com.runnersoftware.decoration.model.Material"  />
+    </resultMap>
 
 </mapper>
