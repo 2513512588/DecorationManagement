@@ -22,6 +22,7 @@ public class OssServiceImpl implements OssService {
         this.aliOssProperties = aliOssProperties;
     }
 
+    @Override
     public String upload(InputStream in) {
         OSS oss = new OSSClientBuilder().build(aliOssProperties.getEndPoint(), aliOssProperties.getKeyId(), aliOssProperties.getKeySecret());
         String fileName = UUID.randomUUID().toString().replace("-","");

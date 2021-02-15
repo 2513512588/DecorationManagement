@@ -33,6 +33,7 @@ public class DesignerServiceImpl implements DesignerService {
         this.userService = userService;
     }
 
+    @Override
     public Map<String, Object> findAllByPage(Map<String, Object> params) {
         Map<String, Object> map = new HashMap<String, Object>(2);
         Page<Designer> page = PageHelper.startPage(Integer.parseInt(params.get("pageNum").toString()),Integer.parseInt(params.get("pageSize").toString()));
@@ -42,6 +43,7 @@ public class DesignerServiceImpl implements DesignerService {
         return map;
     }
 
+    @Override
     @Transactional(rollbackFor = Exception.class)
     public Boolean createDesigner(Designer designer) {
         User user = new User();
@@ -55,6 +57,7 @@ public class DesignerServiceImpl implements DesignerService {
         }
     }
 
+    @Override
     @Transactional(rollbackFor = Exception.class)
     public Boolean updateDesigner(Designer designer) {
         User user = new User();
@@ -68,6 +71,7 @@ public class DesignerServiceImpl implements DesignerService {
         }
     }
 
+    @Override
     @Transactional(rollbackFor = Exception.class)
     public Boolean removeById(Long id) {
         boolean b1 = designerMapper.delete(new Designer().setId(id)) != 0;
@@ -79,6 +83,7 @@ public class DesignerServiceImpl implements DesignerService {
         }
     }
 
+    @Override
     public Designer findById(Long id) {
         return designerMapper.find(new Designer().setId(id)).get(0);
     }

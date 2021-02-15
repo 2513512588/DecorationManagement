@@ -34,6 +34,7 @@ public class UserServiceImpl implements UserService {
         this.designerMapper = designerMapper;
     }
 
+    @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
         User user = userMapper.find(new User().setUsername(s)).get(0);
         return null;
@@ -42,6 +43,7 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Override
     public Boolean update(User user) {
         if(!StringUtils.isEmpty(user.getPassword())){
             user.setPassword(passwordEncoder.encode(user.getPassword()));
@@ -50,15 +52,18 @@ public class UserServiceImpl implements UserService {
     }
 
 
+    @Override
     public Boolean removeById(Long id) {
         designerMapper.delete(new Designer().setId(id));
         return userMapper.delete(new User().setId(id)) != 0;
     }
 
+    @Override
     public Boolean createUser(User user) {
         return userMapper.insert(user.setPassword(passwordEncoder.encode(user.getPassword()))) != 0;
     }
 
+    @Override
     public Map<String, Object> findAllByPage(Map<String, Object> params) {
         Map<String, Object> map = new HashMap<String, Object>(2);
         Page<User> page = PageHelper.startPage(Integer.parseInt(params.get("pageNum").toString()),Integer.parseInt(params.get("pageSize").toString()));
@@ -68,6 +73,7 @@ public class UserServiceImpl implements UserService {
         return map;
     }
 
+    @Override
     public User findById(Long id) {
         return userMapper.find(new User().setId(id)).get(0);
     }

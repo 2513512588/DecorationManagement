@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataSource name="decorationmanagement@localhost">
-  <database-model serializer="dbm" dbms="MYSQL" family-id="MYSQL" format-version="4.20">
+  <database-model serializer="dbm" dbms="MYSQL" family-id="MYSQL" format-version="4.19">
     <root id="1">
       <ServerVersion>8.0.18</ServerVersion>
       <DefaultEngine>InnoDB</DefaultEngine>
@@ -970,14 +970,14 @@
       <Host>localhost</Host>
       <ObjectGrants>SHUTDOWN,SUPER
 BACKUP_ADMIN,CLONE_ADMIN,CONNECTION_ADMIN,PERSIST_RO_VARIABLES_ADMIN,SESSION_VARIABLES_ADMIN,SYSTEM_USER,SYSTEM_VARIABLES_ADMIN
-SELECT|performance_schema
-SELECT|mysql.user
+SELECT|performance_schema:null
+SELECT|mysql.user:null
 </ObjectGrants>
     </user>
     <user id="308" parent="1" name="mysql.sys">
       <Host>localhost</Host>
-      <ObjectGrants>TRIGGER|sys
-SELECT|sys.sys_config
+      <ObjectGrants>TRIGGER|sys:null
+SELECT|sys.sys_config:null
 </ObjectGrants>
     </user>
     <user id="309" parent="1" name="root">
@@ -1036,7 +1036,7 @@ APPLICATION_PASSWORD_ADMIN,AUDIT_ADMIN,BACKUP_ADMIN,BINLOG_ADMIN,BINLOG_ENCRYPTI
     </column>
     <column id="323" parent="311" name="price">
       <Position>3</Position>
-      <DataType>varchar(45)|0s</DataType>
+      <DataType>decimal(10,2 digit)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
     <column id="324" parent="311" name="description">
@@ -1054,144 +1054,149 @@ APPLICATION_PASSWORD_ADMIN,AUDIT_ADMIN,BACKUP_ADMIN,BINLOG_ADMIN,BINLOG_ENCRYPTI
       <DataType>char(17)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="327" parent="311" name="id_UNIQUE">
+    <column id="327" parent="311" name="cover">
+      <Position>7</Position>
+      <DataType>varchar(90)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="328" parent="311" name="id_UNIQUE">
       <ColNames>id</ColNames>
       <Unique>1</Unique>
       <Type>btree</Type>
     </index>
-    <key id="328" parent="311" name="PRIMARY">
+    <key id="329" parent="311" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="329" parent="311" name="id_UNIQUE">
+    <key id="330" parent="311" name="id_UNIQUE">
       <ColNames>id</ColNames>
       <UnderlyingIndexName>id_UNIQUE</UnderlyingIndexName>
     </key>
-    <column id="330" parent="312" name="id">
+    <column id="331" parent="312" name="id">
       <Position>1</Position>
       <DataType>char(17)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="331" parent="312" name="material_group_id">
+    <column id="332" parent="312" name="material_group_id">
       <Position>2</Position>
       <DataType>char(17)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="332" parent="312" name="user_id">
+    <column id="333" parent="312" name="user_id">
       <Position>3</Position>
       <DataType>char(17)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="333" parent="312" name="total">
+    <column id="334" parent="312" name="total">
       <Position>4</Position>
       <DataType>decimal(10,2 digit)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="334" parent="312" name="status">
+    <column id="335" parent="312" name="status">
       <Position>5</Position>
       <DataType>tinyint(4)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="335" parent="312" name="createtime">
+    <column id="336" parent="312" name="createtime">
       <Position>6</Position>
       <DataType>datetime|0s</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
     </column>
-    <index id="336" parent="312" name="id_UNIQUE">
+    <index id="337" parent="312" name="id_UNIQUE">
       <ColNames>id</ColNames>
       <Unique>1</Unique>
       <Type>btree</Type>
     </index>
-    <key id="337" parent="312" name="PRIMARY">
+    <key id="338" parent="312" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="338" parent="312" name="id_UNIQUE">
+    <key id="339" parent="312" name="id_UNIQUE">
       <ColNames>id</ColNames>
       <UnderlyingIndexName>id_UNIQUE</UnderlyingIndexName>
     </key>
-    <column id="339" parent="313" name="id">
+    <column id="340" parent="313" name="id">
       <Position>1</Position>
       <DataType>char(17)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="340" parent="313" name="materials_group_id">
+    <column id="341" parent="313" name="materials_group_id">
       <Position>2</Position>
       <DataType>char(17)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="341" parent="313" name="user_id">
+    <column id="342" parent="313" name="user_id">
       <Position>3</Position>
       <DataType>char(17)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="342" parent="313" name="createtime">
+    <column id="343" parent="313" name="createtime">
       <Position>4</Position>
       <DataType>datetime|0s</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
     </column>
-    <index id="343" parent="313" name="id_UNIQUE">
+    <index id="344" parent="313" name="id_UNIQUE">
       <ColNames>id</ColNames>
       <Unique>1</Unique>
       <Type>btree</Type>
     </index>
-    <key id="344" parent="313" name="PRIMARY">
+    <key id="345" parent="313" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="345" parent="313" name="id_UNIQUE">
+    <key id="346" parent="313" name="id_UNIQUE">
       <ColNames>id</ColNames>
       <UnderlyingIndexName>id_UNIQUE</UnderlyingIndexName>
     </key>
-    <column id="346" parent="314" name="id">
+    <column id="347" parent="314" name="id">
       <Position>1</Position>
       <DataType>char(17)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="347" parent="314" name="username">
+    <column id="348" parent="314" name="username">
       <Position>2</Position>
       <DataType>varchar(45)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="348" parent="314" name="password">
+    <column id="349" parent="314" name="password">
       <Position>3</Position>
-      <DataType>varchar(32)|0s</DataType>
+      <DataType>varchar(60)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="349" parent="314" name="balance">
+    <column id="350" parent="314" name="balance">
       <Position>4</Position>
       <DataType>decimal(10,2 digit)|0s</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>0.00</DefaultExpression>
     </column>
-    <column id="350" parent="314" name="enable">
+    <column id="351" parent="314" name="enable">
       <Position>5</Position>
       <DataType>tinyint(1)|0s</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>1</DefaultExpression>
     </column>
-    <column id="351" parent="314" name="regtime">
+    <column id="352" parent="314" name="regtime">
       <Position>6</Position>
       <DataType>datetime|0s</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
     </column>
-    <index id="352" parent="314" name="id_UNIQUE">
+    <index id="353" parent="314" name="id_UNIQUE">
       <ColNames>id</ColNames>
       <Unique>1</Unique>
       <Type>btree</Type>
     </index>
-    <key id="353" parent="314" name="PRIMARY">
+    <key id="354" parent="314" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="354" parent="314" name="id_UNIQUE">
+    <key id="355" parent="314" name="id_UNIQUE">
       <ColNames>id</ColNames>
       <UnderlyingIndexName>id_UNIQUE</UnderlyingIndexName>
     </key>

@@ -32,7 +32,8 @@ public class DesignerController {
 
     @ApiOperation("查找所有设计师数据")
     @GetMapping("/query")
-    public R findAll(@RequestParam("page") int pageNum , @RequestParam("limit") int pageSize){
+    public R findAll(@RequestParam(value = "page",defaultValue = "1",required = false) int pageNum ,
+                     @RequestParam(value = "limit",defaultValue = "10",required = false) int pageSize){
         Map<String, Object> params = new HashMap<String, Object>(2);
         params.put("pageNum", pageNum);
         params.put("pageSize", pageSize);

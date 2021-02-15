@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="zh">
 <head>
@@ -58,55 +59,15 @@
     </nav>
 
     <div class="card-container">
-        <div class="card">
-            <img src="image/201912081449219995_cuP.jpg" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">肖鹏</h5>
-                <p class="card-text" style="font-size: 13px">用心观察生活，感悟人生真谛，让设计与生活互动。我们生活的真正目的，便是透过创意和点子，为客户塑</p>
+        <c:forEach items="${designersMap.get('rows')}" var="designer">
+            <div class="card">
+                <img src="${designer.cover}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">${designer.name}</h5>
+                    <p class="card-text" style="font-size: 13px">${designer.description}</p>
+                </div>
             </div>
-        </div>
-        <div class="card">
-            <img src="image/201912081449219995_cuP.jpg" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">肖鹏</h5>
-                <p class="card-text" style="font-size: 13px">用心观察生活，感悟人生真谛，让设计与生活互动。我们生活的真正目的，便是透过创意和点子，为客户塑</p>
-            </div>
-        </div>
-        <div class="card">
-            <img src="image/201912081449219995_cuP.jpg" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">肖鹏</h5>
-                <p class="card-text" style="font-size: 13px">用心观察生活，感悟人生真谛，让设计与生活互动。我们生活的真正目的，便是透过创意和点子，为客户塑</p>
-            </div>
-        </div>
-        <div class="card">
-            <img src="image/201912081449219995_cuP.jpg" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">肖鹏</h5>
-                <p class="card-text" style="font-size: 13px">用心观察生活，感悟人生真谛，让设计与生活互动。我们生活的真正目的，便是透过创意和点子，为客户塑</p>
-            </div>
-        </div>
-        <div class="card">
-            <img src="image/201912081449219995_cuP.jpg" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">肖鹏</h5>
-                <p class="card-text" style="font-size: 13px">用心观察生活，感悟人生真谛，让设计与生活互动。我们生活的真正目的，便是透过创意和点子，为客户塑</p>
-            </div>
-        </div>
-        <div class="card">
-            <img src="image/201912081449219995_cuP.jpg" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">肖鹏</h5>
-                <p class="card-text" style="font-size: 13px">用心观察生活，感悟人生真谛，让设计与生活互动。我们生活的真正目的，便是透过创意和点子，为客户塑</p>
-            </div>
-        </div>
-        <div class="card">
-            <img src="image/201912081449219995_cuP.jpg" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">肖鹏</h5>
-                <p class="card-text" style="font-size: 13px">用心观察生活，感悟人生真谛，让设计与生活互动。我们生活的真正目的，便是透过创意和点子，为客户塑</p>
-            </div>
-        </div>
+        </c:forEach>
     </div>
 
     <nav aria-label="breadcrumb">
@@ -117,56 +78,56 @@
 
     <div class="card-container">
 
-        <div class="card">
-            <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <img src="image/201912081449219995_cuP.jpg" class="d-block w-100" alt="...">
-                        <div class="carousel-caption d-none d-md-block">
-                            <h5>Second slide label</h5>
+        <c:forEach items="${materialsMap.get('rows')}" var="material" >
+            <div class="card">
+                <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="image/201912081449219995_cuP.jpg" class="d-block w-100" alt="...">
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5>Second slide label</h5>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="image/201912081449219995_cuP.jpg" class="d-block w-100" alt="...">
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5>Second slide label</h5>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="image/201912081449219995_cuP.jpg" class="d-block w-100" alt="...">
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5>Third slide label</h5>
+                            </div>
                         </div>
                     </div>
-                    <div class="carousel-item">
-                        <img src="image/201912081449219995_cuP.jpg" class="d-block w-100" alt="...">
-                        <div class="carousel-caption d-none d-md-block">
-                            <h5>Second slide label</h5>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <img src="image/201912081449219995_cuP.jpg" class="d-block w-100" alt="...">
-                        <div class="carousel-caption d-none d-md-block">
-                            <h5>Third slide label</h5>
-                        </div>
-                    </div>
+                    <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
                 </div>
-                <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Previous</span>
-                </a>
-                <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Next</span>
-                </a>
+                <div class="card-body">
+                    <h5 class="card-title">玛迩维108内外平全隐形排水系统断桥窗</h5>
+                    <p class="card-text" style="margin-bottom: 0.3rem">规 格：108</p>
+                    <p class="card-text" style="margin-bottom: 0.3rem">产 地：广东佛山</p>
+                    <p class="card-text" style="margin-bottom: 0.3rem">价 格：￥980</p>
+                    <p class="card-text" style="margin-bottom: 0.3rem">上线日期：2021-01-11 15:19:36</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">An item</li>
+                    <li class="list-group-item">A second item</li>
+                    <li class="list-group-item">A third item</li>
+                </ul>
+                <div class="card-body">
+                    <a href="#" class="card-link">立即购买</a>
+                    <a href="#" class="card-link">加入购物车</a>
+                </div>
             </div>
-            <div class="card-body">
-                <h5 class="card-title">玛迩维108内外平全隐形排水系统断桥窗</h5>
-                <p class="card-text" style="margin-bottom: 0.3rem">规 格：108</p>
-                <p class="card-text" style="margin-bottom: 0.3rem">产 地：广东佛山</p>
-                <p class="card-text" style="margin-bottom: 0.3rem">价 格：￥980</p>
-                <p class="card-text" style="margin-bottom: 0.3rem">上线日期：2021-01-11 15:19:36</p>
-            </div>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item">An item</li>
-                <li class="list-group-item">A second item</li>
-                <li class="list-group-item">A third item</li>
-            </ul>
-            <div class="card-body">
-                <a href="#" class="card-link">立即购买</a>
-                <a href="#" class="card-link">加入购物车</a>
-            </div>
-        </div>
-
-
+        </c:forEach>
 
     </div>
 
