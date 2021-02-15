@@ -33,6 +33,7 @@
         WHERE id = '${id}'
     </update>
 
+
     <resultMap id="baseMap" type="com.runnersoftware.decoration.model.ShoppingCar">
         <id property="id" column="id"/>
         <result property="materialGroupId" column="material_group_id"/>
