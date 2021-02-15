@@ -7,6 +7,7 @@ import com.runnersoftware.decoration.utils.R;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -42,18 +43,21 @@ public class UserController {
         return R.ok().data("designer", userService.findById(id));
     }
 
+
     @ApiOperation("添加用户")
     @PostMapping("/create")
     public R insertModel(User user) {
         return R.auto(userService.createUser(user));
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @ApiOperation("删除用户数据")
     @GetMapping("/remove/{id}")
     public R removeModel(@PathVariable Long id){
         return R.auto(userService.removeById(id));
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @ApiOperation("更新用户数据")
     @PostMapping("/update")
     public R updateModel(User user) {

@@ -14,4 +14,6 @@ public interface MaterialMapper extends BaseMapper<Material>{
 
     List<MaterialVO> findAll();
 
+//    List<Material> findByGroupId(Long groupId);
+
 }

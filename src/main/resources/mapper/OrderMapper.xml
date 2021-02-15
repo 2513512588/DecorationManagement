@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.runnersoftware.decoration.mapper.OrderMapper">
+
+    <insert id="insert" parameterType="com.runnersoftware.decoration.model.Order">
+        INSERT INTO sys_order(id, material_group_id, user_id, total, status)
+        VALUES (UUID_SHORT(), #{materialGroupId}, #{userId},
+                (SELECT SUM(price) FROM sys_materials_group WHERE group_id = '${materialGroupId}' GROUP BY group_id)
+                , 1)
+    </insert>
+
+    <select id="findAll" resultMap="queryMap" >
+        SELECT id, material_group_id, material_group_id AS group_id, total, createtime FROM sys_order
+            WHERE user_id = '${userId}'
+    </select>
+
+    <resultMap id="baseMap" type="com.runnersoftware.decoration.model.Order" >
+        <id property="id" column="id" />
+        <result property="materialGroupId" column="material_group_id" />
+        <result property="userId" column="user_id" />
+        <result property="total" column="total" />
+        <result property="status" column="status" />
+        <result property="createTime" column="createtime" />
+    </resultMap>
+
+    <resultMap id="queryMap" type="com.runnersoftware.decoration.model.vo.OrderVO">
+        <id property="id" column="id" />
+        <result property="materialGroupId" column="materials_group_id"/>
+        <result property="total" column="total"/>
+        <result property="createTime" column="createtime"/>
+        <association property="materialVO" resultMap="com.runnersoftware.decoration.mapper.MaterialMapper.queryMap"/>
+    </resultMap>
+
+</mapper>

@@ -2,9 +2,7 @@ package com.runnersoftware.decoration.mapper;
 
 import java.util.List;
 
-/**
- * @author HHY
- */
+
 public interface BaseMapper<T> {
 
     public Integer insert(T t);

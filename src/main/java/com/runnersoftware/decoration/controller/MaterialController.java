@@ -1,12 +1,15 @@
 package com.runnersoftware.decoration.controller;
 
 import com.runnersoftware.decoration.model.Material;
+import com.runnersoftware.decoration.model.dto.SecurityUser;
 import com.runnersoftware.decoration.service.MaterialService;
 import com.runnersoftware.decoration.service.OssService;
 import com.runnersoftware.decoration.utils.R;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -34,37 +37,43 @@ public class MaterialController {
         this.materialService = materialService;
     }
 
+
+    @PreAuthorize("hasRole('ROLE_DESIGNER')")
     @ApiOperation("添加装修材料")
     @PostMapping("/create")
     public R insertModel(@RequestParam String [] name,@RequestParam String[] description,
-                         @RequestParam Float[] price,@RequestParam("file") MultipartFile[] multipartFiles
+                         @RequestParam Double[] price,@RequestParam("file") MultipartFile[] multipartFiles
     ) throws IOException {
         List<Material> list = new ArrayList<>();
+        Long userId = ((SecurityUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUser().getId();
         for (int i = 0; i < name.length; i++) {
             String cover = ossService.upload(multipartFiles[i].getInputStream());
             Material material = new Material();
             material.setName(name[i]);
             material.setPrice(price[i]);
             material.setDescription(description[i]);
-            material.setDesignerId(99123071083872282L);
+            material.setDesignerId(userId);
             material.setCover(cover);;
             list.add(material);
         }
         return R.auto(materialService.createMaterial(list));
     }
 
+    @PreAuthorize("hasRole('ROLE_DESIGNER')")
     @ApiOperation("删除装修材料组")
     @PostMapping("/remove/group/{id}")
     public R removeModelGroup(@PathVariable Long id){
         return R.auto(materialService.removeByGroupId(id));
     }
 
+    @PreAuthorize("hasRole('ROLE_DESIGNER')")
     @ApiOperation("删除装修材料")
     @PostMapping("/remove/{id}")
     public R removeModel(@PathVariable Long id){
         return R.auto(materialService.removeById(id));
     }
 
+    @PreAuthorize("hasRole('ROLE_DESIGNER')")
     @ApiOperation("更新装修材料")
     @PostMapping("/update")
     public R updateModel(Material material){

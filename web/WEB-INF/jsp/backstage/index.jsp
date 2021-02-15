@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <html lang="zh">
 <head>
     <meta charset="utf-8">
@@ -21,10 +22,12 @@
         </ul>
         <ul class="layui-nav layui-layout-right">
             <li class="layui-nav-item">
-                <a href="javascript:void(0);">BieJun</a>
+                <a href="javascript:void(0);">
+                    <security:authentication property="name"/>
+                </a>
                 <dl class="layui-nav-child">
 <%--                    <dd><a href="">帮助中心</a></dd>--%>
-                    <dd><a href="login.html">退出</a></dd>
+                    <dd><a href="${pageContext.request.contextPath}/login">退出</a></dd>
                 </dl>
             </li>
         </ul>
@@ -74,7 +77,7 @@
 
     <div class="layui-footer">
         <!-- 底部固定区域 -->
-        © layui.com - 底部固定区域
+        © runnersoftware
     </div>
 </div>
 <script src="layui/layui.js"></script>

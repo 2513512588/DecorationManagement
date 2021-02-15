@@ -5,9 +5,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 
 import java.util.Map;
 
-/**
- * @author HHY
- */
+
 public interface UserService extends UserDetailsService {
 
     Boolean update(User user);

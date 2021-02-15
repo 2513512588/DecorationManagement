@@ -16,9 +16,6 @@
             <if test="createTime != null">
                 AND createtime = #{createTime}
             </if>
-            <if test="enable != null">
-                AND sys_user.enable = #{enable}
-            </if>
             <if test="id != null" >
                 AND sys_designer.id = '${id}'
             </if>

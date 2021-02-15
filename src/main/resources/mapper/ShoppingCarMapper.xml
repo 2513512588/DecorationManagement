@@ -9,15 +9,29 @@
         FROM sys_scar
     </select>
 
+    <select id="findAll" resultMap="queryMap" parameterType="com.runnersoftware.decoration.model.ShoppingCar">
+        SELECT temp.total, temp.materials_group_id, temp.group_id, SUM(sys_materials_group.price) AS price
+        FROM (SELECT count(*) AS total, materials_group_id, materials_group_id AS group_id
+              FROM sys_scar
+              WHERE user_id = '${userId}'
+              GROUP BY materials_group_id) AS temp
+                 LEFT JOIN sys_materials_group ON temp.materials_group_id = sys_materials_group.group_id
+        GROUP BY materials_group_id
+
+        #         SELECT count(*) AS total, materials_group_id, materials_group_id AS group_id FROM sys_scar
+#             WHERE user_id = '${userId}' GROUP BY materials_group_id
+    </select>
+
     <delete id="delete" parameterType="com.runnersoftware.decoration.model.ShoppingCar">
         DELETE
         FROM sys_scar
-        WHERE id = '${id}'
+        WHERE materials_group_id = '${materialGroupId}'
+          AND user_id = '${userId}'
     </delete>
 
     <insert id="insert" parameterType="com.runnersoftware.decoration.model.ShoppingCar">
         INSERT INTO sys_scar(id, materials_group_id, user_id)
-        VALUES (UUID_SHORT(), #{id}, #{materialGroupId}, #{userId})
+        VALUES (UUID_SHORT(), #{materialGroupId}, #{userId})
     </insert>
 
     <update id="update" parameterType="com.runnersoftware.decoration.model.ShoppingCar">
@@ -39,6 +53,13 @@
         <result property="materialGroupId" column="material_group_id"/>
         <result property="userId" column="user_id"/>
         <result property="createTime" column="createtime"/>
+    </resultMap>
+
+    <resultMap id="queryMap" type="com.runnersoftware.decoration.model.vo.ShoppingCarVO">
+        <result property="materialGroupId" column="materials_group_id"/>
+        <result property="total" column="total"/>
+        <result property="price" column="price"/>
+        <association property="materialVO" resultMap="com.runnersoftware.decoration.mapper.MaterialMapper.queryMap"/>
     </resultMap>
 
 </mapper>

@@ -34,6 +34,6 @@ public class Material {
     @ApiModelProperty("装修材料图片")
     private String cover;
     @ApiModelProperty("装修材料价格")
-    private Float price;
+    private Double price;
 
 }

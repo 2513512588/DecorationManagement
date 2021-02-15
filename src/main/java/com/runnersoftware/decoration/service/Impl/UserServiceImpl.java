@@ -4,19 +4,20 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.runnersoftware.decoration.mapper.DesignerMapper;
 import com.runnersoftware.decoration.model.Designer;
+import com.runnersoftware.decoration.model.dto.SecurityUser;
 import com.runnersoftware.decoration.service.UserService;
 import com.runnersoftware.decoration.mapper.UserMapper;
 import com.runnersoftware.decoration.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -34,10 +35,21 @@ public class UserServiceImpl implements UserService {
         this.designerMapper = designerMapper;
     }
 
+
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-        User user = userMapper.find(new User().setUsername(s)).get(0);
-        return null;
+        List<User> users = userMapper.find(new User().setUsername(s).setEnable(true));
+        if (users.size() == 0){
+            throw new UsernameNotFoundException("用户不存在!");
+        }
+        User user = users.get(0);
+        List<Designer> designers = designerMapper.find(new Designer().setId(user.getId()));
+        Collection<GrantedAuthority> collection = new ArrayList<>();
+        collection.add(new SimpleGrantedAuthority("ROLE_USER"));
+        if (designers.size() == 1){
+            collection.add(new SimpleGrantedAuthority("ROLE_DESIGNER"));
+        }
+        return new SecurityUser(user, collection);
     }
 
     @Autowired
@@ -60,7 +72,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Boolean createUser(User user) {
-        return userMapper.insert(user.setPassword(passwordEncoder.encode(user.getPassword()))) != 0;
+        if (!StringUtils.isEmpty(user.getPassword())){
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
+        }
+        return userMapper.insert(user) != 0;
     }
 
     @Override

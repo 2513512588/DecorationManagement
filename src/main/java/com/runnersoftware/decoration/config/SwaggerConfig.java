@@ -10,7 +10,6 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 
 /**
- * @author HHY
  * "@EnableSwagger2 启用swagger
  */
 @EnableSwagger2

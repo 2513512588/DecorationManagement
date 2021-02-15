@@ -7,6 +7,7 @@ import com.runnersoftware.decoration.utils.R;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -15,9 +16,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-/**
- * @author HHY
- */
+
 @Api(tags = {"设计师管理"})
 @RestController
 @RequestMapping("/designer")
@@ -54,6 +53,7 @@ public class DesignerController {
         this.ossService = ossService;
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @ApiOperation("添加设计师")
     @PostMapping("/create")
     public R insertModel(@RequestParam("file") MultipartFile multipartFile, Designer designer) throws IOException {
@@ -61,6 +61,7 @@ public class DesignerController {
         return R.auto(designerService.createDesigner(designer));
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @ApiOperation("更新设计师数据")
     @PostMapping("/update")
     public R updateModel(@RequestParam(value = "file",required = false) MultipartFile multipartFile, Designer designer) throws IOException {
@@ -70,6 +71,7 @@ public class DesignerController {
         return R.auto(designerService.updateDesigner(designer));
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @ApiOperation("删除设计师数据")
     @GetMapping("/remove/{id}")
     public R removeModel(@PathVariable Long id){

@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="zh">
 <head>
@@ -16,11 +17,26 @@
 <body>
 
 <nav class="navbar navbar-dark bg-dark">
-    <a class="navbar-brand">Navbar</a>
+    <a class="navbar-brand">装修材料网</a>
     <div class="btn-group">
-        <a href="login.html" class="btn btn-primary">登录</a>
-        <a href="login.html" class="btn btn-light">注册</a>
-    </div>
+    <c:choose>
+        <c:when test="${pageContext.request.userPrincipal.authenticated}">
+            <button type="button" class="btn btn-primary">
+                <security:authentication property="name"/> <span class="badge badge-light">I</span>
+<%--                <span class="sr-only"></span>--%>
+            </button>
+            <security:authorize access="hasRole('ROLE_DESIGNER')">
+                 <a href="${pageContext.request.contextPath}/addMaterial" class="btn btn-info">添加装修材料</a>
+            </security:authorize>
+            <a href="${pageContext.request.contextPath}/shopping/query" class="btn btn-info">购物车</a>
+            <a href="${pageContext.request.contextPath}/order/query" class="btn btn-info">订单</a>
+        </c:when>
+        <c:otherwise>
+            <a href="${pageContext.request.contextPath}/login" class="btn btn-primary">登录</a>
+            <a href="${pageContext.request.contextPath}/login" class="btn btn-light">注册</a>
+            <a href="${pageContext.request.contextPath}/backstage" class="btn btn-primary">后台管理</a>
+        </c:otherwise>
+    </c:choose>
 </nav>
 
 <div class="main-body">
@@ -81,29 +97,29 @@
 
     <div class="card-container">
 
-        <c:forEach items="${materialsMap.get('rows')}" var="material">
+        <c:forEach items="${materialsMap.get('rows')}" var="groupItem" varStatus="status">
             <div class="card">
-                <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+                <div id="carouselExampleCaptions${status.index}" class="carousel slide" data-ride="carousel">
                     <div class="carousel-inner">
-                        <c:forEach items="${material.materials}" var="imageItem">
-                            <div class="carousel-item">
-                                <img src="${imageItem.cover}" class="d-block w-100" alt="..." width="100%">
+                        <c:forEach items="${groupItem.materials}" var="imageItem" varStatus="status">
+                            <div class="carousel-item ${status.index == 0 ? 'active' : ''}">
+                                <img src="${imageItem.cover}" class="d-block w-100" alt="...">
                                 <div class="carousel-caption d-none d-md-block">
                                     <h5>${imageItem.name}</h5>
                                 </div>
                             </div>
                         </c:forEach>
                     </div>
-                    <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
+                    <a class="carousel-control-prev" href="#carouselExampleCaptions${status.index}" role="button" data-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                         <span class="sr-only">Previous</span>
                     </a>
-                    <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
+                    <a class="carousel-control-next" href="#carouselExampleCaptions${status.index}" role="button" data-slide="next">
                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
                         <span class="sr-only">Next</span>
                     </a>
                 </div>
-                <c:forEach items="${material.materials}" var="infoItem">
+                <c:forEach items="${groupItem.materials}" var="infoItem">
                     <div class="card-body">
                         <h5 class="card-title">${infoItem.name}</h5>
                         <p class="card-text" style="margin-bottom: 0.3rem">描 述: ${infoItem.description}</p>
@@ -111,13 +127,93 @@
                     </div>
                 </c:forEach>
                 <div class="card-body">
-                    <a href="#" class="card-link">立即购买</a>
-                    <a href="#" class="card-link">加入购物车</a>
+                    <a href="javascript:addOrder(`${groupItem.groupId}`)" class="card-link">立即购买</a>
+                    <a href="javascript:addscar(`${groupItem.groupId}`)" class="card-link">加入购物车</a>
                 </div>
             </div>
         </div>
     </c:forEach>
 
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.js" ></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+    <script type="text/javascript" >
+
+        function addscar(id){
+            $.post(`${pageContext.request.contextPath}/shopping/create/`+ id,function (res){
+                if (res.success){
+                    $.confirm({
+                        title: '添加成功',
+                        content: '',
+                        type: 'orange',
+                        typeAnimated: true,
+                        buttons: {
+                            tryAgain: {
+                                text: '确定',
+                                btnClass: 'btn-red',
+                                action: ()=>{
+                                   location.href = '${pageContext.request.contextPath}/shopping/query'
+                                }
+                            }
+                        }
+                    });
+                }else{
+                    $.confirm({
+                        title: res.message,
+                        type: 'orange',
+                        typeAnimated: true,
+                        buttons: {
+                            tryAgain: {
+                                text: '确定',
+                                btnClass: 'btn-red',
+                                action: ()=>{
+                                    location.href = '${pageContext.request.contextPath}/login'
+                                }
+                            }
+                        }
+                    });
+                }
+            })
+        }
+
+        function addOrder(id){
+            $.post(`${pageContext.request.contextPath}/order/create/`+ id,function (res){
+                if (res.success){
+                    $.confirm({
+                        title: '购买成功',
+                        content: '',
+                        type: 'orange',
+                        typeAnimated: true,
+                        buttons: {
+                            tryAgain: {
+                                text: '确定',
+                                btnClass: 'btn-red',
+                                action: ()=>{
+                                    location.href = '${pageContext.request.contextPath}/order/query'
+                                }
+                            }
+                        }
+                    });
+                }else{
+                    $.confirm({
+                        title: res.message,
+                        type: 'orange',
+                        typeAnimated: true,
+                        buttons: {
+                            tryAgain: {
+                                text: '确定',
+                                btnClass: 'btn-red',
+                                action: ()=>{
+                                    location.href = '${pageContext.request.contextPath}/login'
+                                }
+                            }
+                        }
+                    });
+                }
+            })
+        }
+
+    </script>
 
 </div>
 

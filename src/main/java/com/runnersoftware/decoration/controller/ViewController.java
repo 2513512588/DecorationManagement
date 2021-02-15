@@ -1,21 +1,18 @@
 package com.runnersoftware.decoration.controller;
 
-import com.github.pagehelper.Page;
-import com.github.pagehelper.PageHelper;
-import com.runnersoftware.decoration.model.Material;
+
 import com.runnersoftware.decoration.service.DesignerService;
 import com.runnersoftware.decoration.service.MaterialService;
-import com.runnersoftware.decoration.utils.R;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @Api(tags = {"视图控制器"})
@@ -49,16 +46,30 @@ public class ViewController {
         return "/index";
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @ApiOperation("后台首页控制器")
     @GetMapping("/backstage")
     public String backstage(){
         return "backstage/index";
     }
 
-    @ApiOperation("设计师添加装修材料")
+    @PreAuthorize("hasRole('ROLE_DESIGNER')")
+    @ApiOperation("设计师添加装修材料页面控制器")
     @GetMapping("/addMaterial")
     public String addMaterial(){
         return "front/addMaterial";
+    }
+
+    @ApiOperation("用户登录页面控制器")
+    @GetMapping("/login")
+    public String userLogin(){
+        return "front/login";
+    }
+
+    @ApiOperation("管理员登录页面控制器")
+    @GetMapping("/manager/login")
+    public String managerLogin(){
+        return "backstage/login";
     }
 
 }

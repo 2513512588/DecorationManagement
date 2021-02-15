@@ -17,7 +17,7 @@
 
     <context:annotation-config/>
 
-    <context:property-placeholder location="classpath:db.properties,classpath:alioss.properties"/>
+    <context:property-placeholder location="classpath:db.properties,classpath:alioss.properties,classpath:manager-config.properties"/>
 
     <bean id="pooledDataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
         <property name="driverClass" value="${jdbc.driver}"/>
@@ -33,6 +33,11 @@
         <property name="bucketName" value="${bucketName}" />
         <property name="keyId" value="${keyId}" />
         <property name="keySecret" value="${keySecret}" />
+    </bean>
+
+    <bean id="managerProperties" class="com.runnersoftware.decoration.utils.ManagerProperties">
+        <property name="username" value="${manager.username}" />
+        <property name="password" value="${manager.password}" />
     </bean>
 
 
