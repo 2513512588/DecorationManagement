@@ -7,17 +7,17 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <base href="${pageContext.request.contextPath}/" />
+    <base href="${pageContext.request.contextPath}/"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" ></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="css/front/index.css">
 </head>
 <body>
 
 <nav class="navbar navbar-dark bg-dark">
     <a class="navbar-brand">Navbar</a>
-    <div class="btn-group" >
+    <div class="btn-group">
         <a href="login.html" class="btn btn-primary">登录</a>
         <a href="login.html" class="btn btn-light">注册</a>
     </div>
@@ -33,13 +33,16 @@
         </ol>
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <img src="https://cn.bing.com/sa/simg/hpb/LaDigue_EN-CA1115245085_1920x1080.jpg" class="d-block w-100" alt="...">
+                <img src="https://cn.bing.com/sa/simg/hpb/LaDigue_EN-CA1115245085_1920x1080.jpg" class="d-block w-100"
+                     alt="...">
             </div>
             <div class="carousel-item">
-                <img src="https://cn.bing.com/sa/simg/hpb/LaDigue_EN-CA1115245085_1920x1080.jpg" class="d-block w-100" alt="...">
+                <img src="https://cn.bing.com/sa/simg/hpb/LaDigue_EN-CA1115245085_1920x1080.jpg" class="d-block w-100"
+                     alt="...">
             </div>
             <div class="carousel-item">
-                <img src="https://cn.bing.com/sa/simg/hpb/LaDigue_EN-CA1115245085_1920x1080.jpg" class="d-block w-100" alt="...">
+                <img src="https://cn.bing.com/sa/simg/hpb/LaDigue_EN-CA1115245085_1920x1080.jpg" class="d-block w-100"
+                     alt="...">
             </div>
         </div>
         <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -78,28 +81,18 @@
 
     <div class="card-container">
 
-        <c:forEach items="${materialsMap.get('rows')}" var="material" >
+        <c:forEach items="${materialsMap.get('rows')}" var="material">
             <div class="card">
                 <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
                     <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <img src="image/201912081449219995_cuP.jpg" class="d-block w-100" alt="...">
-                            <div class="carousel-caption d-none d-md-block">
-                                <h5>Second slide label</h5>
+                        <c:forEach items="${material.materials}" var="imageItem">
+                            <div class="carousel-item">
+                                <img src="${imageItem.cover}" class="d-block w-100" alt="..." width="100%">
+                                <div class="carousel-caption d-none d-md-block">
+                                    <h5>${imageItem.name}</h5>
+                                </div>
                             </div>
-                        </div>
-                        <div class="carousel-item">
-                            <img src="image/201912081449219995_cuP.jpg" class="d-block w-100" alt="...">
-                            <div class="carousel-caption d-none d-md-block">
-                                <h5>Second slide label</h5>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <img src="image/201912081449219995_cuP.jpg" class="d-block w-100" alt="...">
-                            <div class="carousel-caption d-none d-md-block">
-                                <h5>Third slide label</h5>
-                            </div>
-                        </div>
+                        </c:forEach>
                     </div>
                     <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -110,26 +103,21 @@
                         <span class="sr-only">Next</span>
                     </a>
                 </div>
-                <div class="card-body">
-                    <h5 class="card-title">玛迩维108内外平全隐形排水系统断桥窗</h5>
-                    <p class="card-text" style="margin-bottom: 0.3rem">规 格：108</p>
-                    <p class="card-text" style="margin-bottom: 0.3rem">产 地：广东佛山</p>
-                    <p class="card-text" style="margin-bottom: 0.3rem">价 格：￥980</p>
-                    <p class="card-text" style="margin-bottom: 0.3rem">上线日期：2021-01-11 15:19:36</p>
-                </div>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">An item</li>
-                    <li class="list-group-item">A second item</li>
-                    <li class="list-group-item">A third item</li>
-                </ul>
+                <c:forEach items="${material.materials}" var="infoItem">
+                    <div class="card-body">
+                        <h5 class="card-title">${infoItem.name}</h5>
+                        <p class="card-text" style="margin-bottom: 0.3rem">描 述: ${infoItem.description}</p>
+                        <p class="card-text" style="margin-bottom: 0.3rem">价 格：${infoItem.price}</p>
+                    </div>
+                </c:forEach>
                 <div class="card-body">
                     <a href="#" class="card-link">立即购买</a>
                     <a href="#" class="card-link">加入购物车</a>
                 </div>
             </div>
-        </c:forEach>
+        </div>
+    </c:forEach>
 
-    </div>
 
 </div>
 
