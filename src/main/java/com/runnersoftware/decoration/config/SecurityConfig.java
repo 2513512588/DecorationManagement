@@ -9,11 +9,17 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.header.HeaderWriter;
+import org.springframework.security.web.header.HeaderWriterFilter;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Configuration
@@ -50,6 +56,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
        http.csrf().disable().cors().disable().authorizeRequests().anyRequest().permitAll()
        .and().exceptionHandling().accessDeniedHandler(new AccessDeniedHandlerImpl())
        .and().formLogin().loginPage("/login").loginProcessingUrl("/user/login");
+
+        HeaderWriter headerWriter = new HeaderWriter() {
+            @Override
+            public void writeHeaders(HttpServletRequest request, HttpServletResponse response) {
+                response.setHeader("X-Frame-Options","SAMEORIGIN");
+            }
+        };
+        List<HeaderWriter> headerWriters = new ArrayList<>();
+        headerWriters.add(headerWriter);
+        HeaderWriterFilter headerWriterFilter = new HeaderWriterFilter(headerWriters);
+        http.addFilter(headerWriterFilter);
+
     }
 
     @Override
@@ -57,8 +75,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         auth.userDetailsService(userService).passwordEncoder(passwordEncoder);
     }
 
-    @Override
-    public void configure(WebSecurity web) throws Exception {
-        web.ignoring().mvcMatchers("/views/*");
-    }
 }

@@ -250,7 +250,7 @@
                               <span>${shoppingItem.total}</span>
                            </div>
                        </td>
-                       <td class="subtotal">${shoppingItem.price}</td>
+                       <td class="subtotal">${shoppingItem.price * shoppingItem.total}</td>
                        <td>
                            <button class="removeOne" type="button" name="button">
                                <i class="fas fa-trash-alt" style="font-size:1.5em"></i>
@@ -307,8 +307,8 @@
             $(".selectOne:checked").each(function(index, item){
                 let product_ID = $(this).closest("tr").find(".productName").attr("data-product_ID");
                 $.post('${pageContext.request.contextPath}/order/create/' + product_ID)
-                location.href = '${pageContext.request.contextPath}/order/query'
             });
+            location.href = '${pageContext.request.contextPath}/order/query'
         }
     });
 

@@ -11,12 +11,11 @@
  Target Server Version : 80018
  File Encoding         : 65001
 
- Date: 15/02/2021 09:44:12
+ Date: 16/02/2021 23:56:07
 */
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
-
 
 CREATE DATABASE decorationmanagement;
 USE decorationmanagement;
@@ -55,6 +54,7 @@ CREATE TABLE `sys_materials_group`  (
   `description` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `group_id` char(17) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `designer_id` char(17) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `cover` varchar(90) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `id_UNIQUE`(`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
@@ -62,6 +62,13 @@ CREATE TABLE `sys_materials_group`  (
 -- ----------------------------
 -- Records of sys_materials_group
 -- ----------------------------
+INSERT INTO `sys_materials_group` VALUES ('99125287270219813', 'Illiana Holmes', 931.00, 'Itaque eiusmod rerum', '99125287270219814', '99123071083872282', 'https://decoration01.oss-cn-shenzhen.aliyuncs.com/71b4fc0048574cf8b39816f8d7d3c9d6');
+INSERT INTO `sys_materials_group` VALUES ('99125287270219815', 'Keefe Murray', 279.00, 'Qui reprehenderit o', '99125287270219814', '99123071083872282', 'https://decoration01.oss-cn-shenzhen.aliyuncs.com/509af17791824b77beda3e15040037f8');
+INSERT INTO `sys_materials_group` VALUES ('99125287270219848', 'Tanner Hardin', 883.00, 'Ipsum fugiat sequi e', '99125287270219849', '99123071083872281', 'https://decoration01.oss-cn-shenzhen.aliyuncs.com/75813bf2b4914349b1986f3cc21c5a0a');
+INSERT INTO `sys_materials_group` VALUES ('99125287270219850', 'Zephr Nixon', 696.00, 'In vero et debitis e', '99125287270219849', '99123071083872281', 'https://decoration01.oss-cn-shenzhen.aliyuncs.com/24530f6d15204379a7153c90543f314a');
+INSERT INTO `sys_materials_group` VALUES ('99125287270219851', 'Aileen Perez', 268.00, 'Laborum cillum molli', '99125287270219849', '99123071083872281', 'https://decoration01.oss-cn-shenzhen.aliyuncs.com/49bfc54fbd86454dbe76d4dd3b86fc28');
+INSERT INTO `sys_materials_group` VALUES ('99125287270219852', 'Caesar Mcfarland', 363.00, 'Voluptatem sit des', '99125287270219853', '99123071083872281', 'https://decoration01.oss-cn-shenzhen.aliyuncs.com/7051d0686ab04e76a7326505f2f1b0ec');
+INSERT INTO `sys_materials_group` VALUES ('99125287270219854', 'Tana Mcknight', 263.00, 'Qui exercitation ali', '99125287270219853', '99123071083872281', 'https://decoration01.oss-cn-shenzhen.aliyuncs.com/bbf2e98b1f97444dbd0ec9e232399471');
 
 -- ----------------------------
 -- Table structure for sys_order
@@ -81,6 +88,10 @@ CREATE TABLE `sys_order`  (
 -- ----------------------------
 -- Records of sys_order
 -- ----------------------------
+INSERT INTO `sys_order` VALUES ('99125287270219825', '99125287270219814', '99123071083872281', 1210.00, 1, '2021-02-16 00:20:17');
+INSERT INTO `sys_order` VALUES ('99125287270219826', '99125287270219814', '99123071083872281', 1210.00, 1, '2021-02-16 02:01:19');
+INSERT INTO `sys_order` VALUES ('99125287270219828', '99125287270219814', '99123071083872281', 1210.00, 1, '2021-02-16 02:06:58');
+INSERT INTO `sys_order` VALUES ('99125287270219847', '99125287270219814', '99123071083872281', 2420.00, 1, '2021-02-16 11:26:10');
 
 -- ----------------------------
 -- Table structure for sys_scar
@@ -124,9 +135,10 @@ INSERT INTO `sys_user` VALUES ('99123071083872287', 'zusovone', '$2a$10$BuoLmKos
 INSERT INTO `sys_user` VALUES ('99123071083872288', 'zomihy', '$2a$10$Glf4a.qEMrkqnas/Jlns3.NWhL5HLiKo4Qitttf84oIZkqXAeaB1m', 0.00, 1, '2021-02-14 22:10:04');
 INSERT INTO `sys_user` VALUES ('99123071083872289', 'sopedam', '$2a$10$pYqtb/AVtcFzXxwXYyRhfOmG6WNioB9i/d/9c.8mpWVIrTYnBOBlG', 0.00, 1, '2021-02-14 22:10:11');
 INSERT INTO `sys_user` VALUES ('99123071083872290', 'xabuvokyny', '$2a$10$B70pZ8p0YfsG6VKly1ptnOjyUXT81G8t1EqvVJTS/cY.HOIlyyL0i', 0.00, 0, '2021-02-14 22:10:42');
-INSERT INTO `sys_user` VALUES ('99123071083872291', 'fefiwofudo', '$2a$10$erY3mDGQd.gN0XNVhz0Z9O2ZClcY2YOyTimJFwqEEK00tl8Z/Zyjy', 0.00, 1, '2021-02-14 22:44:32');
+INSERT INTO `sys_user` VALUES ('99123071083872291', 'fefiwofudo', '$2a$10$erY3mDGQd.gN0XNVhz0Z9O2ZClcY2YOyTimJFwqEEK00tl8Z/Zyjy', 0.00, 0, '2021-02-14 22:44:32');
 INSERT INTO `sys_user` VALUES ('99123071083872292', 'xucigyxi', '$2a$10$QF1yMuGS5krJqoN7yFDqT.uPULnGCSxsJrUu7Lg5uxx9CWIEZM6bK', 0.00, 1, '2021-02-14 22:44:43');
 INSERT INTO `sys_user` VALUES ('99123071083872293', 'zuxajaqeve', '$2a$10$MddZPOogcoTZ9ccCNGC93.Go8C/zZrkv9zZJtIuXD3aIoGD1.8rAC', 0.00, 1, '2021-02-14 22:45:00');
 INSERT INTO `sys_user` VALUES ('99123071083872294', 'hufalu', '$2a$10$jF05HnaX7Ugt7L9t1tzgrOoAm.c3Mn1tCgZ7P4WqZDysltTGtnBtS', 0.00, 1, '2021-02-14 22:45:12');
+INSERT INTO `sys_user` VALUES ('99125287270219829', 'user1', '$2a$10$R8hcSc0Ra.yp2Y2d78EcB.7v/thSViMALgLc.ioNO7KeO5QtaBDZK', 0.00, 1, '2021-02-16 02:15:03');
 
 SET FOREIGN_KEY_CHECKS = 1;

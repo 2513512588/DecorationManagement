@@ -43,6 +43,9 @@
      </form>
  </div>
 
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+
     <script type="text/javascript" >
         function addItem(e){
             let button = document.createElement('button')
@@ -66,9 +69,22 @@
                 data: new FormData(this),
                 processData: false,  // 不处理数据
                 contentType: false,   // 不设置内容类型
-                success: function (res){
+                success:  (res)=>{
                     if (res.success){
-
+                        $.confirm({
+                            title: '添加成功',
+                            type: 'orange',
+                            typeAnimated: true,
+                            buttons: {
+                                tryAgain: {
+                                    text: '确定',
+                                    btnClass: 'btn-red',
+                                    action: ()=>{
+                                        this.reset()
+                                    }
+                                }
+                            }
+                        });
                     }
                 }
             });

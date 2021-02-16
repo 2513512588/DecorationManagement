@@ -35,7 +35,8 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Boolean createOrder(Order order) {
+        int rows = orderMapper.insert(order);
         shoppingCarMapper.delete(new ShoppingCar().setMaterialGroupId(order.getMaterialGroupId()).setUserId(order.getUserId()));
-        return orderMapper.insert(order) != 0;
+        return rows != 0;
     }
 }

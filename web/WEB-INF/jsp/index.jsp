@@ -96,7 +96,6 @@
     </nav>
 
     <div class="card-container">
-
         <c:forEach items="${materialsMap.get('rows')}" var="groupItem" varStatus="status">
             <div class="card">
                 <div id="carouselExampleCaptions${status.index}" class="carousel slide" data-ride="carousel">
@@ -131,8 +130,8 @@
                     <a href="javascript:addscar(`${groupItem.groupId}`)" class="card-link">加入购物车</a>
                 </div>
             </div>
-        </div>
-    </c:forEach>
+        </c:forEach>
+    </div>
 
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.js" ></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
@@ -219,8 +218,8 @@
 
 <div class="jumbotron jumbotron-fluid" style="margin-bottom: 0; margin-top: 2rem; background-color:#474C4B;">
     <div class="container">
-        <h1 class="display-4">Fluid jumbotron</h1>
-        <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
+        <h1 class="display-4">装修材料网</h1>
+        <p class="lead">(c) Copyright 2021 HHY. All Rights Reserved. </p>
     </div>
 </div>
 
