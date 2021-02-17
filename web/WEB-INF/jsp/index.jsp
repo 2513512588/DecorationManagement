@@ -1,3 +1,6 @@
+<%@ page import="com.runnersoftware.decoration.model.dto.SecurityUser" %>
+<%@ page import="org.springframework.security.core.context.SecurityContextHolder" %>
+<%@ page import="com.runnersoftware.decoration.model.vo.MaterialVO" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -129,6 +132,12 @@
                 <div class="card-body">
                     <a href="javascript:addOrder(`${groupItem.groupId}`)" class="card-link">立即购买</a>
                     <a href="javascript:addscar(`${groupItem.groupId}`)" class="card-link">加入购物车</a>
+                    <%
+                        MaterialVO materialVO = ((MaterialVO) pageContext.getAttribute("groupItem"));
+                        if (materialVO.getMaterials().get(0).getDesignerId().equals(((SecurityUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUser().getId())){
+                            out.write("<a href=\"javascript:removeMaterial(`"+ materialVO.getGroupId() +"`)\" class=\"card-link\">删除</a>");
+                        }
+                    %>
                 </div>
             </div>
         </c:forEach>
@@ -205,6 +214,27 @@
                                 btnClass: 'btn-red',
                                 action: ()=>{
                                     location.href = '${pageContext.request.contextPath}/login'
+                                }
+                            }
+                        }
+                    });
+                }
+            })
+        }
+
+        function removeMaterial(id){
+            $.post('${pageContext.request.contextPath}/material/remove/group/'+ id, function (res){
+                if (res.success){
+                    $.confirm({
+                        title: '删除成功!',
+                        type: 'orange',
+                        typeAnimated: true,
+                        buttons: {
+                            tryAgain: {
+                                text: '确定',
+                                btnClass: 'btn-red',
+                                action: ()=>{
+                                    location.reload()
                                 }
                             }
                         }

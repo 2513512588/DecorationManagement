@@ -28,10 +28,10 @@
             WHERE
             <choose>
                 <when test="groupId != null">
-                    AND group_id = '${groupId}'
+                     group_id = '${groupId}'
                 </when>
                 <otherwise>
-                    AND id = '${id}'
+                     id = '${id}'
                 </otherwise>
             </choose>
     </delete>
