@@ -116,7 +116,7 @@
                 <input type="text" name="username" required placeholder="用户名"/>
                 <input type="password" name="password" required placeholder="密码"/>
                 <input type="password" name="rePassword" required placeholder="确认密码"/>
-                <input type="email" name="email" required placeholder="确认密码"/>
+                <input type="email" name="email" required placeholder="邮箱"/>
                 <label style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 15px">
                     <input type="text" maxlength="4" name="code" required placeholder="验证码" style="margin: 0" />
                     <img src="${pageContext.request.contextPath}/code" alt="验证码" onclick="this.src = '${pageContext.request.contextPath}/code?rd='+ new Date().getTime()">
