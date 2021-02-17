@@ -52,5 +52,15 @@ public class OrderController {
     }
 
 
+    @PreAuthorize("hasRole('ROLE_USER')")
+    @ApiOperation("删除订单")
+    @PostMapping("/remove/{id}")
+    @ResponseBody
+    public R removeModel(@PathVariable Long id){
+        Long userId = ((SecurityUser)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUser().getId();
+        Order order = new Order().setId(id).setUserId(userId);
+        return R.auto(orderService.removeById(order));
+    }
+
 
 }

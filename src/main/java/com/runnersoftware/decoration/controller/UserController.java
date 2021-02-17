@@ -2,6 +2,7 @@ package com.runnersoftware.decoration.controller;
 
 
 import com.runnersoftware.decoration.model.User;
+import com.runnersoftware.decoration.model.VerificationCode;
 import com.runnersoftware.decoration.service.UserService;
 import com.runnersoftware.decoration.utils.R;
 import io.swagger.annotations.Api;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -50,14 +52,30 @@ public class UserController {
         return R.auto(userService.createUser(user));
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+    @ApiOperation("用户注册")
+    @PostMapping("/register")
+    public R register(User user, @RequestParam String code , HttpSession session){
+        VerificationCode verificationCode = (VerificationCode) session.getAttribute("code");
+        session.removeAttribute("code");
+        if (!verificationCode.isExpired()){
+            if (verificationCode.getCode().equals(code)){
+                return R.auto(userService.createUser(user));
+            }else{
+                return R.error().message("验证码错误!");
+            }
+        }else{
+            return R.error().message("验证码已过期!");
+        }
+    }
+
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @ApiOperation("删除用户数据")
     @GetMapping("/remove/{id}")
     public R removeModel(@PathVariable Long id){
         return R.auto(userService.removeById(id));
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @ApiOperation("更新用户数据")
     @PostMapping("/update")
     public R updateModel(User user) {

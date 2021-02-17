@@ -27,7 +27,7 @@
                 </a>
                 <dl class="layui-nav-child">
 <%--                    <dd><a href="">帮助中心</a></dd>--%>
-                    <dd><a href="${pageContext.request.contextPath}/login">退出</a></dd>
+                    <dd><a href="${pageContext.request.contextPath}/user/logout">退出</a></dd>
                 </dl>
             </li>
         </ul>

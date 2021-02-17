@@ -30,6 +30,7 @@
             </security:authorize>
             <a href="${pageContext.request.contextPath}/shopping/query" class="btn btn-info">购物车</a>
             <a href="${pageContext.request.contextPath}/order/query" class="btn btn-info">订单</a>
+            <a href="${pageContext.request.contextPath}/user/logout" class="btn btn-info">注销登录</a>
         </c:when>
         <c:otherwise>
             <a href="${pageContext.request.contextPath}/login" class="btn btn-primary">登录</a>

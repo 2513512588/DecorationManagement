@@ -7,11 +7,15 @@
     <insert id="insert" parameterType="com.runnersoftware.decoration.model.Order">
         INSERT INTO sys_order(id, material_group_id, user_id, total, status)
         VALUES (UUID_SHORT(), #{materialGroupId}, #{userId},
-                (SELECT SUM(price) FROM sys_materials_group WHERE group_id = '${materialGroupId}' GROUP BY group_id) *
-                 (SELECT COUNT(*)
-                  FROM sys_scar
-                  WHERE materials_group_id = '${materialGroupId}' AND user_id = '${userId}'
-                  GROUP BY materials_group_id)
+                IFNULL((SELECT SUM(price)
+                        FROM sys_materials_group
+                        WHERE group_id = '${materialGroupId}'
+                        GROUP BY group_id) *
+                       (SELECT COUNT(*)
+                        FROM sys_scar
+                        WHERE materials_group_id = '${materialGroupId}'
+                          AND user_id = '${userId}'
+                        GROUP BY materials_group_id), 1)
                    , 1)
     </insert>
 
@@ -20,6 +24,13 @@
         FROM sys_order
         WHERE user_id = '${userId}'
     </select>
+
+    <delete id="delete" parameterType="com.runnersoftware.decoration.model.Order">
+        DELETE
+        FROM sys_order
+        WHERE user_id = '${userId}'
+          AND id = '${id}'
+    </delete>
 
     <resultMap id="baseMap" type="com.runnersoftware.decoration.model.Order">
         <id property="id" column="id"/>

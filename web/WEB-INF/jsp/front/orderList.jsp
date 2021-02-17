@@ -129,6 +129,7 @@
             <th>材料名称</th>
             <th>总计</th>
             <th>订单时间</th>
+            <th>操作</th>
         </tr>
         </thead>
         <tbody>
@@ -163,11 +164,40 @@
                     </td>
                     <td>${order.total}</td>
                     <td> <fmt:formatDate value="${order.createTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+                    <td><a href="javascript: removeModel(`${order.id}`)" class="btn layui-btn-danger">删除</a></td>
                 </tr>
             </c:forEach>
         </tbody>
     </table>
 
+    <script src="${pageContext.request.contextPath}/js/jquery.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+
+
+    <script type="text/javascript" >
+
+        function removeModel(id){
+            $.confirm({
+                title: '确定删除此订单吗?',
+                content: '',
+                type: 'orange',
+                typeAnimated: true,
+                buttons: {
+                    tryAgain: {
+                        text: '确定',
+                        btnClass: 'btn-red',
+                        action: ()=>{
+                            $.post('${pageContext.request.contextPath}/order/remove/' + id , function (res){
+                                location.reload()
+                            })
+                        }
+                    }
+                }
+            });
+        }
+
+    </script>
 
 </body>
 </html>

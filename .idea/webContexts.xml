@@ -5,6 +5,7 @@
       <map>
         <entry key="file://$PROJECT_DIR$/web/WEB-INF/backstage/views/user/add.html" value="file://$PROJECT_DIR$/web/WEB-INF/backstage/views/user" />
         <entry key="file://$PROJECT_DIR$/web/WEB-INF/front/shoppingcar.html" value="file://$PROJECT_DIR$/web/WEB-INF/front" />
+        <entry key="file://$PROJECT_DIR$/web/WEB-INF/jsp/front/login.jsp" value="file://$PROJECT_DIR$/web/WEB-INF/jsp/front" />
       </map>
     </option>
   </component>

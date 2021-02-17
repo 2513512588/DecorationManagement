@@ -330,8 +330,8 @@
                                     $(this).closest("tr").remove();
                                     reverseCheckbox();
                                 })
-
                             });
+                            location.reload()
                         }
                     },
                     close: function () {
@@ -356,8 +356,9 @@
                         removeProduct($(this).closest('tr').find('.productName').attr('data-product_ID'), ()=>{
                             $(this).closest("tr").remove();
                             if($(".failureItem").length<1){
-                                $(".failureArea").remove();
-                                $(".gap").remove();
+                                // $(".failureArea").remove();
+                                // $(".gap").remove();
+                                location.reload()
                             }
                         })
                     }

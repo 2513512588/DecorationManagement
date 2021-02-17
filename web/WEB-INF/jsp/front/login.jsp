@@ -115,6 +115,12 @@
             <form class="register-form" onsubmit="return register.call(this)">
                 <input type="text" name="username" required placeholder="用户名"/>
                 <input type="password" name="password" required placeholder="密码"/>
+                <input type="password" name="rePassword" required placeholder="确认密码"/>
+                <input type="email" name="email" required placeholder="确认密码"/>
+                <label style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 15px">
+                    <input type="text" maxlength="4" name="code" required placeholder="验证码" style="margin: 0" />
+                    <img src="${pageContext.request.contextPath}/code" alt="验证码" onclick="this.src = '${pageContext.request.contextPath}/code?rd='+ new Date().getTime()">
+                </label>
                 <button type="submit">注册</button>
                 <p class="message">已经注册? <a href="#">登录</a></p>
             </form>
@@ -141,25 +147,41 @@
         });
 
         function register(){
-            $.post('${pageContext.request.contextPath}/user/create',$(this).serialize() , function (res){
-                if (res.success){
-                    $.confirm({
-                        title: '注册成功!',
-                        content: '',
-                        type: 'orange',
-                        typeAnimated: true,
-                        buttons: {
-                            tryAgain: {
-                                text: '确定',
-                                btnClass: 'btn-red',
-                                action: function(){
-                                   location.reload()
+            if ($('input[name=password]').val() === $('input[name=rePassword]').val() ){
+                $.post('${pageContext.request.contextPath}/user/register',$(this).serialize() , function (res){
+                    if (res.success){
+                        $.confirm({
+                            title: '注册成功!',
+                            content: '',
+                            type: 'orange',
+                            typeAnimated: true,
+                            buttons: {
+                                tryAgain: {
+                                    text: '确定',
+                                    btnClass: 'btn-red',
+                                    action: function(){
+                                        location.reload()
+                                    }
                                 }
                             }
-                        }
-                    });
-                }
-            })
+                        });
+                    }else{
+                        $.confirm({
+                            title: res.message,
+                            content: '',
+                            type: 'orange',
+                            typeAnimated: true
+                        });
+                    }
+                })
+            }else{
+                $.confirm({
+                    title: '两次密码输入不一致!',
+                    content: '',
+                    type: 'orange',
+                    typeAnimated: true
+                });
+            }
             return false
         }
     </script>

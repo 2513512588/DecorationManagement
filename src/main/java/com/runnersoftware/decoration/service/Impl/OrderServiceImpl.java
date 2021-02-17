@@ -39,4 +39,9 @@ public class OrderServiceImpl implements OrderService {
         shoppingCarMapper.delete(new ShoppingCar().setMaterialGroupId(order.getMaterialGroupId()).setUserId(order.getUserId()));
         return rows != 0;
     }
+
+    @Override
+    public Boolean removeById(Order order) {
+        return orderMapper.delete(order) != 0;
+    }
 }

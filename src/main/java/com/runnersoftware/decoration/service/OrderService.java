@@ -10,4 +10,6 @@ public interface OrderService {
     List<OrderVO> findAll(Order order);
 
     Boolean createOrder(Order order);
+
+    Boolean removeById(Order order);
 }
