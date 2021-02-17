@@ -325,13 +325,17 @@
                         text: '确定',
                         btnClass: 'btn-red',
                         action: function(){
-                            $(".selectOne:checked").each(function(){
-                                removeProduct($(this).closest('tr').find('.productName').attr('data-product_ID'), ()=>{
-                                    $(this).closest("tr").remove();
-                                    reverseCheckbox();
-                                })
-                            });
-                            location.reload()
+                            new Promise(resolve => {
+                                $(".selectOne:checked").each(function(){
+                                    removeProduct($(this).closest('tr').find('.productName').attr('data-product_ID'), ()=>{
+                                        $(this).closest("tr").remove();
+                                        reverseCheckbox();
+                                    })
+                                });
+                                resolve()
+                            }).then(function (){
+                                location.reload()
+                            })
                         }
                     },
                     close: function () {
